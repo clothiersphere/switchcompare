@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button } from 'semantic-ui-react';
 import FlagIcon from '../FlagIcon';
 import GameInfo from './gameInfo';
+import GameCard from './GameCard';
 
 export default class Body extends Component {
   // componentDidMount() {
@@ -10,7 +11,7 @@ export default class Body extends Component {
 
   renderGameList() {
     return (
-      <div>
+      <div className="gameList">
         {this.props.switchGames.map((game) => {
           const getNsuid = () => {
             let nsuid = game.Nsuid[2];
@@ -19,22 +20,14 @@ export default class Body extends Component {
             }
             return nsuid;
           };
-          const getPrice = () => {
-            const lowestPriceRegion = game.RegionsSortedByPrice[0];
-            const lowestPrice = game.Prices[lowestPriceRegion] / 100;
-            return `$${lowestPrice} + ${lowestPriceRegion}`;
-          };
-          const countryCode = game.RegionsSortedByPrice[0].toLowerCase();
           return (
-            <div key={getNsuid()}>
-              {game.Title} {getPrice()}
-              <FlagIcon code={countryCode} />
-              <GameInfo game={game} />
-            </div>);
+            <GameCard game={game} key={getNsuid()} />
+          );
         })}
       </div>
     );
   }
+  // <GameInfo game={game} />
 
   render() {
     return (
