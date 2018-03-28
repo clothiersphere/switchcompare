@@ -19,6 +19,11 @@ module.exports = {
       include: /node_modules/,
       loaders: ['style-loader', 'css-loader'],
     },
+    {
+      test: /\.svg$/,
+      include: /node_modules/,
+      loader: 'svg-url-loader',
+    },
       // {
       //   test: /\.js$/,
       //   exclude: /node_modules/,
