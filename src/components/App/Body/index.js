@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FlagIcon from '../FlagIcon';
+import GameInfo from './gameInfo';
 
 export default class Body extends Component {
   // componentDidMount() {
@@ -23,13 +24,12 @@ export default class Body extends Component {
             return `$${lowestPrice} + ${lowestPriceRegion}`;
           };
           const countryCode = game.RegionsSortedByPrice[0].toLowerCase();
-          // countryCode = countryCode.toLowercase();
-
 
           return (
             <div key={getNsuid()}>
               {game.Title} {getPrice()}
               <FlagIcon code={countryCode} />
+              <GameInfo game={game} />
             </div>);
         })}
       </div>
