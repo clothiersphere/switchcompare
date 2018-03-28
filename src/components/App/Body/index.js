@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'semantic-ui-react';
 import FlagIcon from '../FlagIcon';
 import GameInfo from './gameInfo';
 
@@ -24,7 +25,6 @@ export default class Body extends Component {
             return `$${lowestPrice} + ${lowestPriceRegion}`;
           };
           const countryCode = game.RegionsSortedByPrice[0].toLowerCase();
-
           return (
             <div key={getNsuid()}>
               {game.Title} {getPrice()}
