@@ -1,19 +1,31 @@
+.body {
+  /*background: linear-gradient(121.71014186886282deg, rgba(248, 198, 215,1) 5.533854166666667%,rgba(175, 233, 249,1) 96.67968749999999%);*/
+  /*background: linear-gradient(121.71014186886282deg, rgba(255, 226, 160,1) 5.533854166666667%,rgba(255, 115, 156,1) 96.67968749999999%);*/
+  /*background: linear-gradient(121.71014186886282deg, rgba(245, 196, 207,1) 5.533854166666667%,rgba(66, 82, 183,1) 96.67968749999999%);*/
+  background: linear-gradient(121.71014186886282deg, rgba(250, 143, 191,1) 5.533854166666667%,rgba(138, 176, 250,1) 96.67968749999999%);
+  /*background: linear-gradient(#e66465, #9198e5);*/
+  background-attachment: fixed;
+}
 .gameList {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
-  align-content: space-around;
+  /*justify-content: center;*/
+  justify-content: space-around;
+  padding: 5px;
 }
 
 .gameCard { 
+  margin: 15px;
   margin-bottom: 1em;
   border-style: solid;
+  border-width: thin;
  }
 
 .metacriticBadge {
  text-align: center;
  border-top: solid;
+ border-width: thin;
 }
 .metacriticBadge.tbd{
   background-color: #cccccc;
