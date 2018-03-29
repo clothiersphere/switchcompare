@@ -1,0 +1,33 @@
+.gameList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: space-around;
+}
+
+.gameCard { 
+  margin-bottom: 1em;
+  border-style: solid;
+ }
+
+.metacriticBadge {
+ text-align: center;
+ border-top: solid;
+}
+.metacriticBadge.tbd{
+  background-color: #cccccc;
+}
+.metacriticBadge.positive{
+  background-color: #6c3;
+}
+.metacriticBadge.mixed{
+  background-color: #fc3;
+}
+.metacriticBadge.negative{
+  background-color: #f00;
+}
+
+.align-self {
+  align-self: center;
+}
