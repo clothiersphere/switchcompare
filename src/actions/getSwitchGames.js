@@ -16,8 +16,8 @@ export function getSwitchGames() {
     });
     return request
       .then((response) => {
-        console.log(response, "eshop")
         dispatch(showQueryResult(response.data));
       });
   };
 }
+
