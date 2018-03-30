@@ -1,22 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Image } from 'semantic-ui-react';
-import MetacriticBadge from './MetacriticBadge';
-// import FlagIcon from '../FlagIcon';
+import PriceCard from './PriceCard';
 
-const GameCard = ({ game }) => {
-  // const getNsuid = () => {
-  //   let nsuid = game.Nsuid[2];
-  //   if (!game.Nsuid[2]) {
-  //     nsuid = game.Nsuid;
-  //   }
-  //   return nsuid;
-  // };
-  // const getPrice = () => {
-  //   const lowestPriceRegion = game.RegionsSortedByPrice[0];
-  //   const lowestPrice = game.Prices[lowestPriceRegion] / 100;
-  //   return `$${lowestPrice} + ${lowestPriceRegion}`;
-  // };
-  // const countryCode = game.RegionsSortedByPrice[0].toLowerCase();
+
+const GameCard = ({ game, setSwitchGame }) => {
   const {
     Categories,
     Excerpt,
@@ -28,37 +15,20 @@ const GameCard = ({ game }) => {
     Url,
   } = game;
 
-
-  // const showMetacritic = () => {
-  //   if (Metacritic.metascore) {
-  //     console.log(Metacritic, 'mc');
-  //     return (<p> Metacritic.metascore </p>);
-  //   }
-  //   return null;
-  // };
-
-  // const showPrices = () => {
-  //   game.Prices.map(price =>
-  //     <div />);
-  // };
-
-  const gameImage = game.Image;
-  const getImage = () => {
-    if (game.Image) {
-      return game.Image;
+  // console.log(game.Image, 'gameimage');
+  // const gameImage = game.Image;
+  const handleKeyDown = (ev) => {
+    if (ev.keyCode === 13) {
+      setSwitchGame(game);
     }
-    return 'http://via.placeholder.com/500x500';
   };
 
   return (
-    <div className="gameCard">
-      <Image className="align-self" src={getImage()} size="medium" />
-      <MetacriticBadge metaInfo={Metacritic} />
+    <div className="gameCard" onKeyDown={() => handleKeyDown}>
+      <Image className="align-self gameImage" onClick={() => setSwitchGame(game)} src={game.Image} size="medium" />
+      <PriceCard prices={Prices} regions={RegionsSortedByPrice} metaInfo={Metacritic} />
     </div>
   );
 };
-
-// {game.Title} {getPrice()}
-// <FlagIcon code={countryCode} />
 
 export default GameCard;

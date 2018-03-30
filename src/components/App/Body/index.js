@@ -29,7 +29,9 @@ export default class Body extends Component {
   render() {
     return (
       <div className="body">
-        { this.renderGameList() }
+        <ul className="gameList">
+          { this.renderGameList() }
+        </ul>
       </div>
     );
   }
