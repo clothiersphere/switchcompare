@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'semantic-ui-react';
-import FlagIcon from '../FlagIcon';
-import GameInfo from './gameInfo';
+// import GameInfo from './gameInfo';
 import GameCard from './GameCard';
 
 export default class Body extends Component {
@@ -21,17 +19,16 @@ export default class Body extends Component {
             return nsuid;
           };
           return (
-            <GameCard game={game} key={getNsuid()} />
+            <GameCard game={game} key={getNsuid()} setSwitchGame={this.props.setSwitchGame} />
           );
         })}
       </div>
     );
   }
-  // <GameInfo game={game} />
 
   render() {
     return (
-      <div>
+      <div className="body">
         { this.renderGameList() }
       </div>
     );

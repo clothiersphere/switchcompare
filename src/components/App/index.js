@@ -9,17 +9,17 @@ import Header from './Header';
 
 class App extends Component {
   componentDidMount() {
-    const { getSwitchGames } = this.props;
+    const { getSwitchGames, setSwitchGame } = this.props;
     getSwitchGames();
   }
 
   render() {
-    const { switchGames } = this.props;
+    const { switchGames, setSwitchGame } = this.props;
 
     return (
       <div className="App">
         <Header />
-        <Body switchGames={switchGames} />
+        <Body switchGames={switchGames} setSwitchGame={setSwitchGame} />
       </div>
     );
   }
@@ -28,16 +28,19 @@ class App extends Component {
 function mapStateToProps(state) {
   const {
     switchGames,
+    selectedGame,
   } = state;
 
   return {
     switchGames,
+    selectedGame,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     getSwitchGames: () => dispatch(actions.getSwitchGames()),
+    setSwitchGame: game => dispatch(actions.setSwitchGame(game)),
   };
 }
 
