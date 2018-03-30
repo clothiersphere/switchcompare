@@ -10,7 +10,7 @@ export default class Body extends Component {
   renderGameList() {
     return (
       <div className="gameList">
-        {this.props.switchGames.map((game) => {
+        {this.props.switchGames.map((game, i) => {
           const getNsuid = () => {
             let nsuid = game.Nsuid[2];
             if (!game.Nsuid[2]) {
@@ -19,7 +19,12 @@ export default class Body extends Component {
             return nsuid;
           };
           return (
-            <GameCard game={game} key={getNsuid()} setSwitchGame={this.props.setSwitchGame} />
+            <GameCard
+              game={game}
+              index={i}
+              key={getNsuid()}
+              setSwitchGame={this.props.setSwitchGame}
+            />
           );
         })}
       </div>

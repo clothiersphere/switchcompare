@@ -3,7 +3,7 @@ import { Image } from 'semantic-ui-react';
 import PriceCard from './PriceCard';
 
 
-const GameCard = ({ game, setSwitchGame }) => {
+const GameCard = ({ game, setSwitchGame, index }) => {
   const {
     Categories,
     Excerpt,
@@ -15,8 +15,6 @@ const GameCard = ({ game, setSwitchGame }) => {
     Url,
   } = game;
 
-  // console.log(game.Image, 'gameimage');
-  // const gameImage = game.Image;
   const handleKeyDown = (ev) => {
     if (ev.keyCode === 13) {
       setSwitchGame(game);
@@ -24,8 +22,8 @@ const GameCard = ({ game, setSwitchGame }) => {
   };
 
   return (
-    <div className="gameCard" onKeyDown={() => handleKeyDown}>
-      <Image className="align-self gameImage" onClick={() => setSwitchGame(game)} src={game.Image} size="medium" />
+    <div className="gameCard" tabIndex={index} onKeyDown={() => handleKeyDown} onClick={() => setSwitchGame(game)} role="button">
+      <Image className="align-self gameImage" src={game.Image} size="medium" />
       <PriceCard prices={Prices} regions={RegionsSortedByPrice} metaInfo={Metacritic} />
     </div>
   );
