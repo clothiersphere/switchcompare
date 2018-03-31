@@ -8,11 +8,12 @@ const PriceCard = ({ prices, regions, metaInfo }) => {
 
   return (
     <div className="priceCard">
-      <FlagIcon className="flagIcon" code={countryCode} />
-      <div className="lowestPrice">
+      <div className="price">
+        <FlagIcon className="flagIcon" code={countryCode} />
+        <div className="lowestPrice">
         ${lowestPrice}
+        </div>
       </div>
-      <MetacriticBadge metaInfo={metaInfo} />
     </div>
   );
 };

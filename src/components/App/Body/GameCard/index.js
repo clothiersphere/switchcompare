@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Image } from 'semantic-ui-react';
 import PriceCard from './PriceCard';
+import MetacriticBadge from './MetacriticBadge';
 
 
 const GameCard = ({ game, setSwitchGame, index }) => {
@@ -24,6 +25,10 @@ const GameCard = ({ game, setSwitchGame, index }) => {
   return (
     <div className="gameCard" tabIndex={index} onKeyDown={() => handleKeyDown} onClick={() => setSwitchGame(game)} role="button">
       <Image className="align-self gameImage" src={game.Image} size="medium" />
+      <div className="publisherDateCard">
+        {Published}
+        <MetacriticBadge metaInfo={Metacritic} />
+      </div>
       <PriceCard prices={Prices} regions={RegionsSortedByPrice} metaInfo={Metacritic} />
     </div>
   );
