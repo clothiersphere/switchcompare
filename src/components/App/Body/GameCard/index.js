@@ -11,8 +11,6 @@ export default class GameCard extends Component {
     };
   }
 
-  // handleOpen = () => this.setState({ modalOpen: true })
-  // handleClose = () => this.setState({ modalOpen: false })
   handleClick() {
     this.setState({ modalOpen: true });
   }
@@ -24,10 +22,6 @@ export default class GameCard extends Component {
   //   game, setSwitchGame, index, history,
   // }) => {
   render() {
-    // const handleClick = (gameCode) => {
-    // setSwitchGame(game);
-    // };
-
     const {
       Categories,
       Excerpt,
@@ -43,8 +37,14 @@ export default class GameCard extends Component {
 
     const handleKeyDown = (ev) => {
       if (ev.keyCode === 13) {
-        setSwitchGame(game);
+        this.handleClick();
       }
+    };
+
+    const showCategories = () => {
+      let result;
+      Categories.forEach(category => result += category);
+      return result;
     };
 
     const gameImage = this.props.game.Image;
@@ -72,12 +72,21 @@ export default class GameCard extends Component {
             open={this.state.modalOpen}
             onClose={() => this.handleClose()}
           >
-            <Modal.Header>{Title}</Modal.Header>
+            <Modal.Header>
+              <div className="modalHeader">
+                <div>
+                  {Title}
+                </div>
+                <div>
+                  {showCategories()}
+                </div>
+              </div>
+            </Modal.Header>
             <Modal.Content image>
               <Image wrapped size="medium" src={gameImage} />
               <Modal.Description>
                 <Header>{Excerpt}</Header>
-                <p>{Categories}</p>
+                <p>{showCategories()}</p>
               </Modal.Description>
             </Modal.Content>
           </Modal>
