@@ -1,53 +1,90 @@
 import React, { Component } from 'react';
-import { Image } from 'semantic-ui-react';
+import { Header, Image, Modal } from 'semantic-ui-react';
 import PriceCard from './PriceCard';
 import MetacriticBadge from './MetacriticBadge';
 
+export default class GameCard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      modalOpen: false,
+    };
+  }
 
-const GameCard = ({
-  game, setSwitchGame, index, history,
-}) => {
-  const handleClick = (gameCode) => {
+  // handleOpen = () => this.setState({ modalOpen: true })
+  // handleClose = () => this.setState({ modalOpen: false })
+  handleClick() {
+    this.setState({ modalOpen: true });
+  }
+
+  handleClose() {
+    this.setState({ modalOpen: false });
+  }
+  // const GameCard = ({
+  //   game, setSwitchGame, index, history,
+  // }) => {
+  render() {
+    // const handleClick = (gameCode) => {
     // setSwitchGame(game);
-    history.push(`/game/${gameCode}`);
-  };
+    // };
 
-  const {
-    Categories,
-    Excerpt,
-    Metacritic,
-    Prices,
-    Published,
-    RegionsSortedByPrice,
-    Title,
-    Url,
-    GameCode,
-  } = game;
+    const {
+      Categories,
+      Excerpt,
+      Metacritic,
+      Prices,
+      Published,
+      RegionsSortedByPrice,
+      Title,
+      Url,
+      GameCode,
+      // } = game;
+    } = this.props.game;
 
-  const handleKeyDown = (ev) => {
-    if (ev.keyCode === 13) {
-      setSwitchGame(game);
-    }
-  };
+    const handleKeyDown = (ev) => {
+      if (ev.keyCode === 13) {
+        setSwitchGame(game);
+      }
+    };
 
+    const gameImage = this.props.game.Image;
+    const gameIndex = this.props.index;
 
-  return (
-    <div
-      className="gameCard"
-      tabIndex={index}
-      onKeyDown={() => handleKeyDown}
-      // onClick={() => setSwitchGame(game)}
-      onClick={() => handleClick(GameCode)}
-      role="button"
-    >
-      <Image className="align-self gameImage" src={game.Image} size="medium" />
-      <div className="publisherDateCard">
-        {Published}
-        <MetacriticBadge metaInfo={Metacritic} />
+    return (
+      <div>
+        <div
+          className="gameCard"
+          tabIndex={gameIndex}
+          onKeyDown={() => handleKeyDown}
+        // onClick={() => setSwitchGame(game)}
+          onClick={() => this.handleClick()}
+          role="button"
+        >
+          <Image className="align-self gameImage" src={gameImage} size="medium" />
+          <div className="publisherDateCard">
+            {Published}
+            <MetacriticBadge metaInfo={Metacritic} />
+          </div>
+          <PriceCard prices={Prices} regions={RegionsSortedByPrice} metaInfo={Metacritic} />
+        </div>
+        <div>
+          <Modal
+            open={this.state.modalOpen}
+            onClose={() => this.handleClose()}
+          >
+            <Modal.Header>{Title}</Modal.Header>
+            <Modal.Content image>
+              <Image wrapped size="medium" src={gameImage} />
+              <Modal.Description>
+                <Header>{Excerpt}</Header>
+                <p>{Categories}</p>
+              </Modal.Description>
+            </Modal.Content>
+          </Modal>
+        </div>
       </div>
-      <PriceCard prices={Prices} regions={RegionsSortedByPrice} metaInfo={Metacritic} />
-    </div>
-  );
-};
+    );
+  }
+}
 
-export default GameCard;
+// export default GameCard;
