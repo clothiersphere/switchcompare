@@ -9,10 +9,14 @@ export default class GameInfo extends Component {
     };
   }
 
-  handleOpen = () => this.setState({ modalOpen: true })
-  handleClose = () => this.setState({ modalOpen: false })
+  // handleOpen = () => this.setState({ modalOpen: true })
+  // handleClose = () => this.setState({ modalOpen: false })
 
   render() {
+    console.log(this.props.match.params.gameCode, 'selectedGame');
+    const game = this.props.switchGames.filter(game => game.GameCode === this.props.match.params.gameCode);
+
+
     const {
       Categories,
       Excerpt,
@@ -22,7 +26,7 @@ export default class GameInfo extends Component {
       RegionsSortedByPrice,
       Title,
       Url,
-    } = this.props.game;
+    } = game[0];
 
     const showMetacritic = () => {
       if (Metacritic.metascore) {
@@ -31,27 +35,33 @@ export default class GameInfo extends Component {
       return null;
     };
 
+    const showPrices = () => {
+      game.Prices.map(price =>
+        <div />);
+    };
+
     // if (game.hasOwnProperty('Sale')) {
-    if (this.props.game.Sale) {
+    if (game.Sale) {
       // const { Sale } = game;
       console.log('we got a sale');
     }
+    // return (
+    //   <Modal >
+    //     <Modal.Header>{Title}</Modal.Header>
+    //     <Modal.Content image>
+    //       <Image wrapped size="medium" src={game.Image} />
+    //       <Modal.Description>
+    //         <Header>{Excerpt}</Header>
+    //         <p>{Categories}</p>
+    //         {showMetacritic()}
+    //       </Modal.Description>
+    //     </Modal.Content>
+    //   </Modal>
+    // );
     return (
-      <Modal
-        trigger={<Button onClick={this.handleOpen}>+</Button>}
-        open={this.state.modalOpen}
-        onClose={this.handleClose}
-      >
-        <Modal.Header>{Title}</Modal.Header>
-        <Modal.Content image>
-          <Image wrapped size="medium" src={this.props.game.Image} />
-          <Modal.Description>
-            <Header>{Excerpt}</Header>
-            <p>{Categories}</p>
-            {showMetacritic()}
-          </Modal.Description>
-        </Modal.Content>
-      </Modal>
+      <div>
+        {game[0].Title}
+      </div>
     );
   }
 }

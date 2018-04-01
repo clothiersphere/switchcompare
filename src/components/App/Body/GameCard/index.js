@@ -4,7 +4,14 @@ import PriceCard from './PriceCard';
 import MetacriticBadge from './MetacriticBadge';
 
 
-const GameCard = ({ game, setSwitchGame, index }) => {
+const GameCard = ({
+  game, setSwitchGame, index, history,
+}) => {
+  const handleClick = (gameCode) => {
+    // setSwitchGame(game);
+    history.push(`/game/${gameCode}`);
+  };
+
   const {
     Categories,
     Excerpt,
@@ -14,6 +21,7 @@ const GameCard = ({ game, setSwitchGame, index }) => {
     RegionsSortedByPrice,
     Title,
     Url,
+    GameCode,
   } = game;
 
   const handleKeyDown = (ev) => {
@@ -22,8 +30,16 @@ const GameCard = ({ game, setSwitchGame, index }) => {
     }
   };
 
+
   return (
-    <div className="gameCard" tabIndex={index} onKeyDown={() => handleKeyDown} onClick={() => setSwitchGame(game)} role="button">
+    <div
+      className="gameCard"
+      tabIndex={index}
+      onKeyDown={() => handleKeyDown}
+      // onClick={() => setSwitchGame(game)}
+      onClick={() => handleClick(GameCode)}
+      role="button"
+    >
       <Image className="align-self gameImage" src={game.Image} size="medium" />
       <div className="publisherDateCard">
         {Published}
