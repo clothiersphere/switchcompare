@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MetacriticBadge = ({ metaInfo }) => {
+const MetacriticBadge = ({ metaInfo, display }) => {
   const displayScore = () => {
     if (metaInfo.metascore) {
       return (
@@ -11,7 +11,16 @@ const MetacriticBadge = ({ metaInfo }) => {
   };
 
   const badgeColor = () => {
-    let className = 'metacriticBadge';
+    let className = null;
+
+    if (display === 'gameCard') {
+      className = 'metacriticBadge gameCardSQ';
+    }
+
+    if (display === 'modal') {
+      className = 'metacriticBadge gameCardModal';
+    }
+
     const checkScore = () => {
       if (metaInfo.metascore) {
         return metaInfo.metascore;
