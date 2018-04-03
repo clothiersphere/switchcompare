@@ -58,7 +58,7 @@ export default class GameCard extends Component {
       return result;
     };
 
-    const showPrices = () => (
+    const showPriceList = () => (
       <ul className="gameCardPriceList">
         {RegionsSortedByPrice.map((region) => {
           let country = null;
@@ -84,11 +84,11 @@ export default class GameCard extends Component {
       </ul>
     );
 
-    const showSix = () => {
-      const sixCheapest = RegionsSortedByPrice.slice(0, 5);
+    const showCheapList = () => {
+      const cheapest = RegionsSortedByPrice.slice(0, 5);
       return (
         <ul className="gameCardPriceList">
-          {sixCheapest.map((region) => {
+          {cheapest.map((region) => {
             let country = null;
             if (region === 'US') {
               country = 'USA';
@@ -150,17 +150,22 @@ export default class GameCard extends Component {
                 </div>
               </div>
             </Modal.Header>
-            <Modal.Content image>
-              <Image wrapped size="medium" src={gameImage} />
-              <Modal.Description>
-                <Header>{Excerpt}</Header>
-                <p>Released: {datePublished.toString()}</p>
+            <Modal.Content image className="modalContentImage">
+              <Image wrapped size="medium" className="modalGameImage" src={gameImage} />
+              <Modal.Description className="modalDescription">
+                <Header className="modalDescriptionHeader zeroMargin">
+                  {Excerpt}
+                </Header>
                 <div>
+                  <p className="zeroMargin">Released: {datePublished.toString()}</p>
+                  <Icon className="external alternate" />
+                  <a href={nintendoOfficialUrl} target="_blank">Link to Official Site </a>
+                </div>
+                <div>
+                  <a href={Metacritic.link} target="_blank">Metacritic Score: </a>
                   <MetacriticBadge display="gameCardModal" metaInfo={Metacritic} />
                 </div>
-                <Icon className="external alternate" />
-                <a href={nintendoOfficialUrl} > Link to Official Site </a>
-                {showSix()}
+                {showCheapList()}
               </Modal.Description>
             </Modal.Content>
           </Modal>

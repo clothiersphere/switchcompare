@@ -17,7 +17,7 @@ const MetacriticBadge = ({ metaInfo, display }) => {
       className = 'metacriticBadge gameCardSQ';
     }
 
-    if (display === 'modal') {
+    if (display === 'gameCardModal') {
       className = 'metacriticBadge gameCardModal';
     }
 
