@@ -16,6 +16,7 @@ export default class Body extends Component {
       <div className="body">
         <Switch>
           <Route path="/game/:gameCode" render={routeProps => <GameInfo {...routeProps} {...props} />} />
+          <Route exact path="/sale" render={routeProps => <GameList {...routeProps} {...props} />} />
           <Route exact path="/" render={routeProps => <GameList {...routeProps} {...props} />} />
         </Switch>
       </div>

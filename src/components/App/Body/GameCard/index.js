@@ -37,6 +37,7 @@ export default class GameCard extends Component {
       Url,
       GameCode,
       title_lower,
+      Nsuid,
       // } = game;
     } = this.props.game;
 
