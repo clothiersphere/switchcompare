@@ -1,11 +1,22 @@
-.body {
-  /*background: linear-gradient(121.71014186886282deg, rgba(248, 198, 215,1) 5.533854166666667%,rgba(175, 233, 249,1) 96.67968749999999%);*/
-  /*background: linear-gradient(121.71014186886282deg, rgba(255, 226, 160,1) 5.533854166666667%,rgba(255, 115, 156,1) 96.67968749999999%);*/
-  /*background: linear-gradient(121.71014186886282deg, rgba(245, 196, 207,1) 5.533854166666667%,rgba(66, 82, 183,1) 96.67968749999999%);*/
-  background: linear-gradient(121.71014186886282deg, rgba(250, 143, 191,1) 5.533854166666667%,rgba(138, 176, 250,1) 96.67968749999999%);
-  /*background: linear-gradient(#e66465, #9198e5);*/
+/** {
+  margin: 0;
+  padding: 0;
+}*/
+
+.HeaderMenu {
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(121.71014186886282deg, rgba(157, 189, 204,1) 5.533854166666667%,rgba(231, 61, 161,1) 96.67968749999999%);
   background-attachment: fixed;
 }
+
+.body {
+  /*background: linear-gradient(121.71014186886282deg, rgba(250, 143, 191,1) 5.533854166666667%,rgba(138, 176, 250,1) 96.67968749999999%);*/
+  /*background: linear-gradient(121.71014186886282deg, rgba(195, 229, 248,1) 5.533854166666667%,rgba(224, 52, 146,1) 96.67968749999999%);*/
+  background: linear-gradient(121.71014186886282deg, rgba(157, 189, 204,1) 5.533854166666667%,rgba(231, 61, 161,1) 96.67968749999999%);
+  background-attachment: fixed;
+}
+
 .gameList {
   display: flex;
   flex-direction: row;
@@ -15,31 +26,128 @@
   padding: 5px;
 }
 
+.align-self {
+  align-self: center;
+}
+
+.gameList ul li {
+  list-style-type: none;
+}
+
 .gameCard { 
   margin: 15px;
   margin-bottom: 1em;
-  border-style: solid;
-  border-width: thin;
+  border: thin solid;
+  cursor: pointer;
  }
 
-.metacriticBadge {
- text-align: center;
- border-top: solid;
- border-width: thin;
+.gameImage {
+  border-bottom: thin solid;
 }
+
+.metacriticBadge.gameCardSQ {
+  display: inline;
+  justify-content: center;
+  align-self: center;
+  margin-right: 5px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-left: thin solid;
+  border-right: thin solid;
+}
+.metacriticBadge.gameCardModal {
+  display: inline-block;
+  border: thin solid;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
 .metacriticBadge.tbd{
   background-color: #cccccc;
 }
+
 .metacriticBadge.positive{
   background-color: #6c3;
 }
+
 .metacriticBadge.mixed{
   background-color: #fc3;
 }
+
 .metacriticBadge.negative{
   background-color: #f00;
 }
 
-.align-self {
-  align-self: center;
+.priceCard {
+  font-size: 1em;
+  background-color: #9ca3d3;
+  display: flex;
+  justify-content: center;
+}
+
+.title {
+  margin-right: 20px;
+}
+
+.publisherDateCard {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #bf8bdd;
+  border-bottom: thin solid;
+}
+
+.lowestPrice {
+  margin-left: 2px;
+  display: inline;
+}
+
+.flagIcon {
+  margin-left: 5px;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-around;
+}
+
+.gameCardPriceList {
+  padding-left: 0;
+}
+.gameCardPriceEntry {
+  list-style: none;
+  display: flex;
+}
+
+.gameCardPriceAmount {
+  margin-left: auto;
+}
+
+.zeroMargin {
+  margin: 0 !important;
+}
+
+.modalGameImage img {
+  border: thin solid;
+}
+.modalDescription {
+  display: flex !important;
+  flex-direction: column;
+  width: 100% !important;
+  /*background-color: lightpink;*/
+}
+
+.modalDescriptionHeader {
+  margin-bottom: 0 !important;
+}
+
+.modalContentImage { 
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center;
+  /*background-color: lightpink;*/
 }

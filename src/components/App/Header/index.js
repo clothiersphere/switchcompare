@@ -4,11 +4,11 @@ import { Button } from 'semantic-ui-react';
 
 // class Header extends Component {
 //   render() {
-const Header = ({ showSales }) => (
+const Header = ({ showGameSales, showAllGames }) => (
   // const { showSale } = this.props;
   <div className="HeaderMenu">
-    <Button>Home</Button>
-    <Button onClick={() => showSales()}>Sale</Button>
+    <Button onClick={() => showAllGames()}>Home</Button>
+    <Button onClick={() => showGameSales()}>Sale</Button>
     <Button>About</Button>
   </div>
 );

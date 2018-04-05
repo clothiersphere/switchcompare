@@ -15,12 +15,17 @@ class App extends Component {
 
   render() {
     const {
-      switchGames, setSwitchGame, showSales, gamesDisplayOptions,
+      switchGames,
+      setSwitchGame,
+      showGameSales,
+      showAllGames,
+      gamesDisplayOptions,
+
     } = this.props;
 
     return (
       <div className="App">
-        <Header showSales={showSales} />
+        <Header showAllGames={showAllGames} showGameSales={showGameSales} />
         <Body switchGames={switchGames} setSwitchGame={setSwitchGame} gamesDisplayOptions={gamesDisplayOptions} />
       </div>
     );
@@ -45,7 +50,8 @@ function mapDispatchToProps(dispatch) {
   return {
     getSwitchGames: () => dispatch(actions.getSwitchGames()),
     setSwitchGame: game => dispatch(actions.setSwitchGame(game)),
-    showSales: () => dispatch(actions.showSales()),
+    showGameSales: () => dispatch(actions.showGameSales()),
+    showAllGames: () => dispatch(actions.showAllGames()),
   };
 }
 

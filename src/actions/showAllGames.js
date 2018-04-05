@@ -1,8 +1,7 @@
 import * as actionTypes from '../constants/actionTypes';
 
-export function showSales() {
+export function showAllGames() {
   return {
-    type: actionTypes.SHOW_SALES,
+    type: actionTypes.SHOW_ALL_GAMES,
   };
 }
-

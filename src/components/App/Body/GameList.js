@@ -40,8 +40,6 @@ export default class GameList extends Component {
       return nsuid;
     };
 
-    console.log(games.length);
-
     return (
       <div className="gameList">
         {games.map((game, i) => (

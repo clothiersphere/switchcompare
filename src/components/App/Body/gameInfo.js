@@ -13,10 +13,7 @@ export default class GameInfo extends Component {
   // handleClose = () => this.setState({ modalOpen: false })
 
   render() {
-    console.log(this.props.match.params.gameCode, 'selectedGame');
     const game = this.props.switchGames.filter(game => game.GameCode === this.props.match.params.gameCode);
-
-
     const {
       Categories,
       Excerpt,

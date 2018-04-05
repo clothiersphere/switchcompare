@@ -4,7 +4,6 @@ const initialState = {};
 
 function setSwitchGame(state, action) {
   const { game } = action;
-  console.log(game, 'game');
   return [...state, { game }];
 }
 
