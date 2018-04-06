@@ -65832,7 +65832,22 @@ app.get('/api/eshop', (req, res) => {
       },
     },
   ];
-  const result = eshop.filter(game => game.hasOwnProperty('Prices'));
+  const result = eshop.filter(game => Object.hasOwnProperty.call(game, 'Prices'));
+
+  result.forEach((game) => {
+    if (Object.hasOwnProperty.call(game, 'Sale')) {
+      const Prices = game.Sale;
+      const regions = Object.keys(Prices);
+      const RegionsSortedByPrice = regions.sort((a, b) => Prices[a].Price - Prices[b].Price);
+
+      game.Sale = {
+        RegionsSortedByPrice,
+        Prices,
+      };
+    }
+  });
+
+
   res.send(result);
   // const us = SwitchEshop.getGamesAmerica();
   // const jp = SwitchEshop.getGamesJapan();
