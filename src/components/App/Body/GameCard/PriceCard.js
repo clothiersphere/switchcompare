@@ -6,10 +6,10 @@ const PriceCard = ({ prices, regions, metaInfo }) => {
   const lowestPrice = prices[regions[0]] / 100;
 
   return (
-    <div className="priceCard">
-      <div className="price">
-        <FlagIcon className="flagIcon" code={countryCode} />
-        <div className="lowestPrice">
+    <div className="priceCardSq">
+      <div className="priceSq">
+        <FlagIcon className="flagIconSq" code={countryCode} />
+        <div className="lowestPriceSq">
         ${lowestPrice}
         </div>
       </div>

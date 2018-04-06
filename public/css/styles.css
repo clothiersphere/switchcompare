@@ -4,10 +4,14 @@
 }*/
 
 .HeaderMenu {
+  height: 100px;
   display: flex;
+  align-items: center;
   justify-content: center;
-  background: linear-gradient(121.71014186886282deg, rgba(157, 189, 204,1) 5.533854166666667%,rgba(231, 61, 161,1) 96.67968749999999%);
-  background-attachment: fixed;
+/*  background: linear-gradient(121.71014186886282deg, rgba(157, 189, 204,1) 5.533854166666667%,rgba(231, 61, 161,1) 96.67968749999999%);
+  background-attachment: fixed;*/
+  background-color: black;
+  
 }
 
 .body {
@@ -15,6 +19,13 @@
   /*background: linear-gradient(121.71014186886282deg, rgba(195, 229, 248,1) 5.533854166666667%,rgba(224, 52, 146,1) 96.67968749999999%);*/
   background: linear-gradient(121.71014186886282deg, rgba(157, 189, 204,1) 5.533854166666667%,rgba(231, 61, 161,1) 96.67968749999999%);
   background-attachment: fixed;
+}
+
+.displayMessage {
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+  font-size: 3em;
 }
 
 .gameList {
@@ -34,18 +45,54 @@
   list-style-type: none;
 }
 
-.gameCard { 
+.gameCard {
+  border: thin solid;
+}
+
+.gameCardSQ { 
   margin: 15px;
   margin-bottom: 1em;
   border: thin solid;
   cursor: pointer;
  }
 
-.gameImage {
+ .gameCardTile {
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+  align-items: center;
+  /*border: thin solid;*/
+ }
+
+ .gameCardTileImage {
+/*  border-top: thin solid;
+  border-left: solid;
+  border-bottom: thin solid;*/
+ }
+
+ .gameCardTileInfo {
+  display: flex;
+
+  /*flex-direction: row;*/
+  /*flex-wrap: no-wrap;*/
+  flex-direction: column;
+  /*background-color: white;*/
+  /*border: thin solid;*/
+ }
+
+ .gameCardTilePrices {
+  /*display: flex;*/
+ }
+
+ .saleCardRegularPrice {
+  text-decoration: line-through;
+ }
+
+.gameCardSQImage {
   border-bottom: thin solid;
 }
 
-.metacriticBadge.gameCardSQ {
+.metacriticBadge.square {
   display: inline;
   justify-content: center;
   align-self: center;
@@ -57,6 +104,16 @@
   border-left: thin solid;
   border-right: thin solid;
 }
+
+.metacriticBadge.tile {
+  /*display:inline-flex;*/
+  align-self: flex-start;
+  /*justify-content: center;*/
+  /*display: block;*/
+  border: thin solid;
+  /*width: fit;*/
+}
+
 .metacriticBadge.gameCardModal {
   display: inline-block;
   border: thin solid;
@@ -82,7 +139,7 @@
   background-color: #f00;
 }
 
-.priceCard {
+.priceCardSq {
   font-size: 1em;
   background-color: #9ca3d3;
   display: flex;
@@ -101,12 +158,12 @@
   border-bottom: thin solid;
 }
 
-.lowestPrice {
+.lowestPriceSq {
   margin-left: 2px;
   display: inline;
 }
 
-.flagIcon {
+.flagIconSq {
   margin-left: 5px;
 }
 

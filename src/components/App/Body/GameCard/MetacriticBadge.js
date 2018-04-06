@@ -14,11 +14,15 @@ const MetacriticBadge = ({ metaInfo, display }) => {
     let className = null;
 
     if (display === 'gameCard') {
-      className = 'metacriticBadge gameCardSQ';
+      className = 'metacriticBadge square';
     }
 
     if (display === 'gameCardModal') {
       className = 'metacriticBadge gameCardModal';
+    }
+
+    if (display === 'gameCardTile') {
+      className = 'metacriticBadge tile';
     }
 
     const checkScore = () => {

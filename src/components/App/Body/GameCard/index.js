@@ -3,7 +3,9 @@ import { Header, Image, Modal, Icon } from 'semantic-ui-react';
 import countries from 'i18n-iso-countries';
 import FlagIcon from '../../FlagIcon';
 import PriceCard from './PriceCard';
+import SaleCard from './SaleCard';
 import MetacriticBadge from './MetacriticBadge';
+import TilePriceCard from './Tile/TilePriceCard';
 
 countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
 
@@ -22,9 +24,7 @@ export default class GameCard extends Component {
   handleClose() {
     this.setState({ modalOpen: false });
   }
-  // const GameCard = ({
-  //   game, setSwitchGame, index, history,
-  // }) => {
+
   render() {
     const {
       Categories,
@@ -38,7 +38,7 @@ export default class GameCard extends Component {
       GameCode,
       title_lower,
       Nsuid,
-      // } = game;
+      Sale,
     } = this.props.game;
 
     const handleKeyDown = (ev) => {
@@ -114,27 +114,72 @@ export default class GameCard extends Component {
       );
     };
 
+    const lowestPrice = () => {
+      let lowestComparedPrice = null;
+      let lowestPriceRegion = null;
+
+      if (Object.hasOwnProperty.call(Prices, 'Sale')) {
+        if (Prices[RegionsSortedByPrice[0]] > Sale.Prices[Sale.RegionsSortedByPrice[0]].Price) {
+          lowestComparedPrice = Sale.Prices[RegionsSortedByPrice[0]].Price;
+          lowestPriceRegion = Sale.RegionsSortedByPrice[0];
+        }
+      }
+
+      lowestComparedPrice = Prices[RegionsSortedByPrice[0]];
+      lowestPriceRegion = RegionsSortedByPrice[0];
+
+
+      return (
+        <div className="lowestComparedPrice">
+          Lowest Price:<FlagIcon className="flagIconSq" code={lowestPriceRegion.toLowerCase()} />
+          ${(lowestComparedPrice / 100).toFixed(2)}
+        </div>
+      );
+    };
+
+
     const gameImage = this.props.game.Image;
-    const gameIndex = this.props.index;
     const nintendoOfficialUrl = `https://www.nintendo.co.uk/${Url}`;
     const datePublished = new Date(Published);
 
+    const gameCardSQ = (
+      <div
+        className="gameCardSQ"
+        onKeyDown={() => handleKeyDown}
+        onClick={() => this.handleClick()}
+        role="button"
+      >
+        <Image className="align-self gameCardSQImage" src={gameImage} size="medium" />
+        <div className="publisherDateCard">
+          {Published}
+          <MetacriticBadge display="gameCard" metaInfo={Metacritic} />
+        </div>
+        <PriceCard prices={Prices} regions={RegionsSortedByPrice} metaInfo={Metacritic} />
+      </div>
+    );
+
+    const gameCardTile = () => (
+      <div
+        className="gameCardTile"
+        onKeyDown={() => handleKeyDown}
+        onClick={() => this.handleClick()}
+        role="button"
+      >
+        <div>
+          <Image className="align-self gameCardTileImage" src={gameImage} size="tiny" />
+        </div>
+        <div className="gameCardTileInfo">
+          {Title}
+          <MetacriticBadge display="gameCardTile" metaInfo={Metacritic} />
+          <TilePriceCard prices={Prices} sale={Sale} regions={RegionsSortedByPrice} />
+          {lowestPrice()}
+        </div>
+      </div>
+    );
+
     return (
       <div>
-        <div
-          className="gameCard"
-          tabIndex={gameIndex}
-          onKeyDown={() => handleKeyDown}
-          onClick={() => this.handleClick()}
-          role="button"
-        >
-          <Image className="align-self gameImage" src={gameImage} size="medium" />
-          <div className="publisherDateCard">
-            {Published}
-            <MetacriticBadge display="gameCard" metaInfo={Metacritic} />
-          </div>
-          <PriceCard prices={Prices} regions={RegionsSortedByPrice} metaInfo={Metacritic} />
-        </div>
+        {gameCardTile()}
         <div>
           <Modal
             open={this.state.modalOpen}
