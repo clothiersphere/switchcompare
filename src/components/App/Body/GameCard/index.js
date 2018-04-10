@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Header, Image, Modal, Icon } from 'semantic-ui-react';
+import { Header, Image, Modal, Icon, Table } from 'semantic-ui-react';
+import moment from 'moment';
 import countries from 'i18n-iso-countries';
 import FlagIcon from '../../FlagIcon';
 import PriceCard from './PriceCard';
@@ -49,6 +50,9 @@ export default class GameCard extends Component {
 
     const showCategories = () => {
       let result = null;
+      if (!Categories) {
+        return result;
+      }
       Categories.forEach((category, i) => {
         if (i === 0) {
           result = category;
@@ -118,17 +122,17 @@ export default class GameCard extends Component {
       let lowestComparedPrice = null;
       let lowestPriceRegion = null;
 
+      lowestComparedPrice = Prices[RegionsSortedByPrice[0]];
+      lowestPriceRegion = RegionsSortedByPrice[0];
+
       if (Object.hasOwnProperty.call(Prices, 'Sale')) {
         if (Prices[RegionsSortedByPrice[0]] > Sale.Prices[Sale.RegionsSortedByPrice[0]].Price) {
           lowestComparedPrice = Sale.Prices[RegionsSortedByPrice[0]].Price;
           lowestPriceRegion = Sale.RegionsSortedByPrice[0];
+        } else {
+
         }
       }
-
-      lowestComparedPrice = Prices[RegionsSortedByPrice[0]];
-      lowestPriceRegion = RegionsSortedByPrice[0];
-
-
       return (
         <div className="lowestComparedPrice">
           Lowest Price:<FlagIcon className="flagIconSq" code={lowestPriceRegion.toLowerCase()} />
@@ -137,19 +141,29 @@ export default class GameCard extends Component {
       );
     };
 
+    const showSaleDate = () => {
+      if (Sale.Prices) {
+        const saleDate = Sale.Prices[Sale.RegionsSortedByPrice[0]].End;
+        const saleEnd = moment(saleDate).format('h:mm a MM/DD/YY');
+        return saleEnd;
+      }
+
+      return null;
+    };
 
     const gameImage = this.props.game.Image;
     const nintendoOfficialUrl = `https://www.nintendo.co.uk/${Url}`;
     const datePublished = new Date(Published);
 
+
     const gameCardSQ = (
       <div
-        className="gameCardSQ"
+        className="gameCardSq"
         onKeyDown={() => handleKeyDown}
         onClick={() => this.handleClick()}
         role="button"
       >
-        <Image className="align-self gameCardSQImage" src={gameImage} size="medium" />
+        <Image className="align-self gameCardSqImage" src={gameImage} size="medium" />
         <div className="publisherDateCard">
           {Published}
           <MetacriticBadge display="gameCard" metaInfo={Metacritic} />
@@ -165,21 +179,27 @@ export default class GameCard extends Component {
         onClick={() => this.handleClick()}
         role="button"
       >
-        <div>
-          <Image className="align-self gameCardTileImage" src={gameImage} size="tiny" />
-        </div>
+
+        <Image className="align-self gameCardTileImage" src={gameImage} size="tiny" />
         <div className="gameCardTileInfo">
-          {Title}
-          <MetacriticBadge display="gameCardTile" metaInfo={Metacritic} />
-          <TilePriceCard prices={Prices} sale={Sale} regions={RegionsSortedByPrice} />
-          {lowestPrice()}
+          <div className="gameCardTileTitle">
+            {Title}
+          </div>
+          <div className="gameCardTileInfoNotTitle">
+            <MetacriticBadge display="gameCardTile" metaInfo={Metacritic} />
+            <TilePriceCard prices={Prices} sale={Sale} regions={RegionsSortedByPrice} />
+            {showSaleDate()}
+            {lowestPrice()}
+
+          </div>
         </div>
       </div>
     );
 
+
     return (
       <div>
-        {gameCardTile()}
+        {gameCardSQ}
         <div>
           <Modal
             open={this.state.modalOpen}

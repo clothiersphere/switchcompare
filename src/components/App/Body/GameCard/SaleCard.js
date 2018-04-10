@@ -17,16 +17,13 @@ const SaleCard = ({ prices, sale, regions }) => {
   const saleDate = Prices[RegionsSortedByPrice[0]].End;
   const saleEnd = moment(saleDate).format('h:mm a MM/DD/YY');
 
-
   return (
     <div className="saleCard">
       <div className="salePrice">
         <FlagIcon className="flagIconTile" code={countryCode} />
          ${lowestSalePrice} <span className="saleCardRegularPrice"> ${regularPrice} </span>{pricePercentageDifference}% Off
       </div>
-      <div>
-        Onsale until: {saleEnd}
-      </div>
+      <div />
     </div>
   );
 };
