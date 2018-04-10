@@ -1,35 +1,22 @@
 import React, { Component } from 'react';
 import GameCard from './GameCard';
 
-
 export default class GameList extends Component {
-  componentDidMount() {
-
-  }
-
-  componentWillReceiveProps() {
-
-  }
-
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     showSale: false,
-  //   };
-  // }
-
   render() {
     const {
       switchGames,
       setSwitchGame,
       history,
       gamesDisplayOptions,
+      searchTerm,
     } = this.props;
 
+    const { term } = this.props.searchTerm;
+    // let games = switchGames.filter(game => Object.hasOwnProperty.call(game, 'Sale'));
     let games = switchGames;
 
-    if (gamesDisplayOptions.showSales) {
-      games = switchGames.filter(game => Object.hasOwnProperty.call(game, 'Sale'));
+    if (term !== '') {
+      games = games.filter(game => game.title_lower.includes(term));
     }
 
     const getNsuid = (game) => {
@@ -40,17 +27,19 @@ export default class GameList extends Component {
       return nsuid;
     };
 
+    const showGames = () => games.map((game, i) => (
+      <GameCard
+        game={game}
+        index={i}
+        key={getNsuid(game)}
+        setSwitchGame={setSwitchGame}
+        history={history}
+      />
+    ));
+
     return (
       <div className="gameList">
-        {games.map((game, i) => (
-          <GameCard
-            game={game}
-            index={i}
-            key={getNsuid(game)}
-            setSwitchGame={setSwitchGame}
-            history={history}
-          />
-            ))}
+        {showGames()}
       </div>
     );
   }

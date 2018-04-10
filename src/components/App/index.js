@@ -9,8 +9,9 @@ import Header from './Header';
 
 class App extends Component {
   componentDidMount() {
-    const { getSwitchGames } = this.props;
-    getSwitchGames();
+    // const { getSwitchGames } = this.props;
+    // getSwitchGames();
+    this.props.getSwitchGames();
   }
 
   render() {
@@ -20,13 +21,25 @@ class App extends Component {
       showGameSales,
       showAllGames,
       gamesDisplayOptions,
+      searchGames,
+      searchTerm,
 
     } = this.props;
 
+
     return (
       <div className="App">
-        <Header showAllGames={showAllGames} showGameSales={showGameSales} />
-        <Body switchGames={switchGames} setSwitchGame={setSwitchGame} gamesDisplayOptions={gamesDisplayOptions} />
+        <Header
+          searchGames={searchGames}
+          showAllGames={showAllGames}
+          showGameSales={showGameSales}
+        />
+        <Body
+          searchTerm={searchTerm}
+          switchGames={switchGames}
+          setSwitchGame={setSwitchGame}
+          gamesDisplayOptions={gamesDisplayOptions}
+        />
       </div>
     );
   }
@@ -34,12 +47,17 @@ class App extends Component {
 
 function mapStateToProps(state) {
   const {
+    searchGames,
+    searchTerm,
     switchGames,
     selectedGame,
     gamesDisplayOptions,
   } = state;
 
+
   return {
+    searchTerm,
+    searchGames,
     switchGames,
     selectedGame,
     gamesDisplayOptions,
@@ -52,6 +70,7 @@ function mapDispatchToProps(dispatch) {
     setSwitchGame: game => dispatch(actions.setSwitchGame(game)),
     showGameSales: () => dispatch(actions.showGameSales()),
     showAllGames: () => dispatch(actions.showAllGames()),
+    searchGames: term => dispatch(actions.searchGames(term)),
   };
 }
 

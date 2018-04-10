@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
-import { Button } from 'semantic-ui-react';
+import { Button, Icon, Input, Segment } from 'semantic-ui-react';
 // import HeaderMenu from './Menu';
 
 // class Header extends Component {
 //   render() {
-const Header = ({ showGameSales, showAllGames }) => (
+const Header = ({ showGameSales, showAllGames, searchGames }) => (
   // const { showSale } = this.props;
   <div className="HeaderMenu">
-    <Button onClick={() => showAllGames()}>Home</Button>
-    <Button onClick={() => showGameSales()}>Sale</Button>
-    <Button>About</Button>
+    <Icon name="search" size="large" />
+    <Input
+      className="headerInput"
+      placeholder="Search"
+      onChange={e => searchGames(e.target.value)}
+    />
   </div>
 );
+
 export default Header;
+
+
+// <Button>Home</Button>
+// <Button onClick={() => showAllGames()}>All Games</Button>
+// <Button onClick={() => showGameSales()}>Sale</Button>
+// <Button>About</Button>
