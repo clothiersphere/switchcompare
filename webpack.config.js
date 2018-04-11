@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   entry: [
     'webpack-dev-server/client?http://localhost:8080',
@@ -6,9 +8,10 @@ module.exports = {
   ],
   module: {
     loaders: [{
-      test: /\.jsx?$/,
+      // test: /\.(jsx)?$/,
       exclude: /node_modules/,
-      loader: 'react-hot-loader!babel-loader',
+      loader: 'babel-loader',
+      // loaders: ['react-hot-loader/webpack', 'babel-loader'],
     },
     {
       test: /\.(png|jpg|gif)$/,
@@ -35,7 +38,7 @@ module.exports = {
     extensions: ['*', '.js', '.jsx'],
   },
   output: {
-    path: `${__dirname}/app`,
+    path: path.resolve(`${__dirname}/app`),
     publicPath: '/',
     filename: 'bundle.js',
   },
