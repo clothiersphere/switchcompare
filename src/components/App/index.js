@@ -7,6 +7,7 @@ import * as actions from '../../actions';
 import Body from './Body';
 import Header from './Header';
 
+
 class App extends Component {
   componentDidMount() {
     // const { getSwitchGames } = this.props;
@@ -18,7 +19,7 @@ class App extends Component {
     const {
       switchGames,
       setSwitchGame,
-      showGameSales,
+      showOnSale,
       showAllGames,
       gamesDisplayOptions,
       searchGames,
@@ -32,7 +33,7 @@ class App extends Component {
         <Header
           searchGames={searchGames}
           showAllGames={showAllGames}
-          showGameSales={showGameSales}
+          showOnSale={showOnSale}
         />
         <Body
           searchTerm={searchTerm}
@@ -68,7 +69,7 @@ function mapDispatchToProps(dispatch) {
   return {
     getSwitchGames: () => dispatch(actions.getSwitchGames()),
     setSwitchGame: game => dispatch(actions.setSwitchGame(game)),
-    showGameSales: () => dispatch(actions.showGameSales()),
+    showOnSale: () => dispatch(actions.showOnSale()),
     showAllGames: () => dispatch(actions.showAllGames()),
     searchGames: term => dispatch(actions.searchGames(term)),
   };

@@ -16,27 +16,38 @@ export default class GameList extends Component {
 
   loadItems(page) {
     const self = this;
+
     const games = self.state.games;
 
-    if (this.props.switchGames.length > 1) {
-      console.log(self, 'self');
+    let { switchGames } = this.props;
+
+    if (this.props.gamesDisplayOptions.showSales) {
+      switchGames = switchGames.filter(game => Object.hasOwnProperty.call(game, 'Sale'));
+    }
+
+    if (switchGames.length > 1) {
       const start = self.state.index;
-      const end = self.state.index + 7;
 
-      console.log(start, 'start');
+      let end = self.state.index + 7;
+      const lastPosition = switchGames.length - 1;
 
-      for (let i = start; i < end; i++) {
-        games.push(this.props.switchGames[i]);
+      if (!switchGames[end]) {
+        end = lastPosition;
       }
 
 
-      if (self.state.index < 400) {
+      for (let i = start; i < end; i++) {
+        games.push(switchGames[i]);
+      }
+
+      if (self.state.index <= lastPosition - 7) {
         self.setState({
           games,
           count: self.state.count + 1,
           index: end,
         });
       } else {
+        console.log(self.state.index, lastPosition, 'gothere');
         self.setState({
           hasMoreItems: false,
         });

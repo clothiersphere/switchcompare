@@ -11,7 +11,7 @@ const Header = ({ showGameSales, showAllGames, searchGames }) => (
     <Input
       className="headerInput"
       placeholder="Search"
-      onChange={e => searchGames(e.target.value)}
+      onSubmit={e => searchGames(e.target.value)}
     />
   </div>
 );

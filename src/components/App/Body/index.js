@@ -16,16 +16,14 @@ export default class Body extends Component {
   toggleVisibility() { this.setState({ visible: !this.state.visible }); }
 
   render() {
-    // const { switchGames, setSwitchGame } = this.props;
     const { props } = this;
     const { visible } = this.state;
 
-    // <Button className="sidebarButton" size="large" onClick={() => this.toggleVisibility()}><Icon size="big" name="sidebar" /></Button>
     return (
       <div className="body">
-
+        <Button className="sidebarButton" size="large" onClick={() => this.toggleVisibility()}><Icon size="big" name="sidebar" /></Button>
         <Sidebar.Pushable as={Segment}>
-          <Sidebar as={Menu} animation="push" width="thin" visible={visible} icon="labeled" vertical inverted>
+          <Sidebar as={Menu} animation="scale down" direction="top" visible={visible} inverted>
             <Menu.Item name="home">
               <Icon name="home" />
               Home

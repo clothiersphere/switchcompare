@@ -1,20 +1,20 @@
 import * as actionTypes from '../constants/actionTypes';
 
 const initialState = {
-  showSales: false,
+  showOnSale: false,
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case actionTypes.SHOW_GAME_SALES:
+    case actionTypes.SHOW_ON_SALE:
       return {
         ...state,
-        showSales: true,
+        showOnSale: true,
       };
     case actionTypes.SHOW_ALL_GAMES:
       return {
         ...state,
-        showSales: false,
+        showOnSale: false,
       };
     default:
       return state;

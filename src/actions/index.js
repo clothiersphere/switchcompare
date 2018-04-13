@@ -1,13 +1,13 @@
 import { getSwitchGames } from './getSwitchGames';
 import { setSwitchGame } from './setSwitchGame';
-import { showGameSales } from './showGameSales';
+import { showOnSale } from './showOnSale';
 import { showAllGames } from './showAllGames';
 import { searchGames } from './searchGames';
 
 export {
   getSwitchGames,
   setSwitchGame,
-  showGameSales,
+  showOnSale,
   showAllGames,
   searchGames,
 };
