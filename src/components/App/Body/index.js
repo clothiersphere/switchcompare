@@ -23,7 +23,7 @@ export default class Body extends Component {
       <div className="body">
         <Button className="sidebarButton" size="large" onClick={() => this.toggleVisibility()}><Icon size="big" name="sidebar" /></Button>
         <Sidebar.Pushable as={Segment}>
-          <Sidebar as={Menu} animation="scale down" direction="top" visible={visible} inverted>
+          <Sidebar as={Menu} animation="scale down" direction="left" visible={visible} inverted>
             <Menu.Item name="home">
               <Icon name="home" />
               Home

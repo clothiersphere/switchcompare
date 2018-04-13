@@ -3,11 +3,11 @@ import { routerReducer } from 'react-router-redux';
 
 import switchGames from './getSwitchGames';
 import searchTerm from './searchTerm';
-import gamesDisplayOptions from './gamesDisplayOptions';
+import displayOptions from './displayOptions';
 
 export default combineReducers({
   switchGames,
-  gamesDisplayOptions,
+  displayOptions,
   searchTerm,
   routing: routerReducer,
 });

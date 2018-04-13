@@ -19,7 +19,7 @@ class App extends Component {
       setSwitchGame,
       showOnSale,
       showAllGames,
-      gamesDisplayOptions,
+      displayOptions,
       searchGames,
       searchTerm,
 
@@ -37,7 +37,7 @@ class App extends Component {
           searchTerm={searchTerm}
           switchGames={switchGames}
           setSwitchGame={setSwitchGame}
-          gamesDisplayOptions={gamesDisplayOptions}
+          displayOptions={displayOptions}
         />
       </div>
     );
@@ -50,7 +50,7 @@ function mapStateToProps(state) {
     searchTerm,
     switchGames,
     selectedGame,
-    gamesDisplayOptions,
+    displayOptions,
   } = state;
 
 
@@ -59,7 +59,7 @@ function mapStateToProps(state) {
     searchGames,
     switchGames,
     selectedGame,
-    gamesDisplayOptions,
+    displayOptions,
   };
 }
 

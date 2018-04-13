@@ -20,9 +20,9 @@ export default class GameList extends Component {
 
     const games = self.state.games;
 
-    let { switchGames, gamesDisplayOptions } = this.props;
+    let { switchGames, displayOptions } = this.props;
     // display options
-    if (gamesDisplayOptions.showOnSale) {
+    if (displayOptions.showOnSale) {
       switchGames = switchGames.filter(game => Object.hasOwnProperty.call(game, 'Sale'));
     }
 
@@ -160,7 +160,7 @@ export default class GameList extends Component {
 
 
     const divStyle = {
-      height: '800px',
+      height: '760px',
       overflow: 'auto',
     };
 
