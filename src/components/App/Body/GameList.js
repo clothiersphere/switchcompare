@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import GameCard from './GameCard';
+import shortid from 'shortid';
 
 
 export default class GameList extends Component {
@@ -19,15 +20,14 @@ export default class GameList extends Component {
 
     const games = self.state.games;
 
-    let { switchGames } = this.props;
-
-    if (this.props.gamesDisplayOptions.showSales) {
+    let { switchGames, gamesDisplayOptions } = this.props;
+    // display options
+    if (gamesDisplayOptions.showOnSale) {
       switchGames = switchGames.filter(game => Object.hasOwnProperty.call(game, 'Sale'));
     }
 
     if (switchGames.length > 1) {
       const start = self.state.index;
-
       let end = self.state.index + 7;
       const lastPosition = switchGames.length - 1;
 
@@ -47,7 +47,6 @@ export default class GameList extends Component {
           index: end,
         });
       } else {
-        console.log(self.state.index, lastPosition, 'gothere');
         self.setState({
           hasMoreItems: false,
         });
@@ -128,11 +127,15 @@ export default class GameList extends Component {
     // );
 
 
-    const loader = <div className="loader">Loading ...</div>;
+    const loader = <div className="loader" key={shortid.generate()}>Loading ...</div>;
 
-    const games = [];
 
-    this.state.games.map((game, i) => {
+    // if (this.state.games.length === 0) {
+    //   games = null;
+    // }
+
+
+    const games = this.state.games.map((game, i) => {
       const getNsuid = (game) => {
         let nsuid;
         if (game.Nsuid[2]) {
@@ -143,19 +146,24 @@ export default class GameList extends Component {
         return nsuid;
       };
 
-      games.push(<GameCard
-        game={game}
-        index={i}
-        key={getNsuid(game)}
-        setSwitchGame={setSwitchGame}
-        history={history}
-      />);
+
+      return (
+        <GameCard
+          game={game}
+          index={i}
+          setSwitchGame={setSwitchGame}
+          history={history}
+          key={shortid.generate()}
+        />
+      );
     });
+
 
     const divStyle = {
       height: '800px',
       overflow: 'auto',
     };
+
 
     return (
       <div style={divStyle}>

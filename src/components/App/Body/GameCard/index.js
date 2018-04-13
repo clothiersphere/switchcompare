@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Header, Image, Modal, Icon, Table } from 'semantic-ui-react';
+import shortid from 'shortid';
 import moment from 'moment';
 import countries from 'i18n-iso-countries';
 import FlagIcon from '../../FlagIcon';
@@ -7,6 +8,7 @@ import PriceCard from './PriceCard';
 import SaleCard from './SaleCard';
 import MetacriticBadge from './MetacriticBadge';
 import TilePriceCard from './Tile/TilePriceCard';
+
 
 countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
 
@@ -198,8 +200,18 @@ export default class GameCard extends Component {
 
 
     return (
-      <div>
-        {gameCardSQ}
+      <div
+        className="gameCardSq"
+        onKeyDown={() => handleKeyDown}
+        onClick={() => this.handleClick()}
+        role="button"
+      >
+        <Image className="align-self gameCardSqImage" src={gameImage} size="medium" />
+        <div className="publisherDateCard">
+          {Published}
+          <MetacriticBadge display="gameCard" metaInfo={Metacritic} />
+        </div>
+        <PriceCard prices={Prices} regions={RegionsSortedByPrice} metaInfo={Metacritic} />
         <div>
           <Modal
             open={this.state.modalOpen}
