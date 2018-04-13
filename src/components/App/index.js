@@ -10,8 +10,6 @@ import Header from './Header';
 
 class App extends Component {
   componentDidMount() {
-    // const { getSwitchGames } = this.props;
-    // getSwitchGames();
     this.props.getSwitchGames();
   }
 
