@@ -1,20 +1,26 @@
 import * as actionTypes from '../constants/actionTypes';
 
 const initialState = {
-  showOnSale: false,
+  showSales: false,
+  sidebarOpen: false,
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case actionTypes.TOGGLE_SIDEBAR:
+      return {
+        ...state,
+        sidebarOpen: !state.sidebarOpen,
+      };
     case actionTypes.SHOW_ON_SALE:
       return {
         ...state,
-        showOnSale: true,
+        showSales: true,
       };
     case actionTypes.SHOW_ALL_GAMES:
       return {
         ...state,
-        showOnSale: false,
+        showSales: false,
       };
     default:
       return state;

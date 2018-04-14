@@ -3,6 +3,7 @@ import { setSwitchGame } from './setSwitchGame';
 import { showOnSale } from './showOnSale';
 import { showAllGames } from './showAllGames';
 import { searchGames } from './searchGames';
+import { toggleSidebar } from './toggleSidebar';
 
 export {
   getSwitchGames,
@@ -10,4 +11,5 @@ export {
   showOnSale,
   showAllGames,
   searchGames,
+  toggleSidebar,
 };
