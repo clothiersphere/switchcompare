@@ -3,6 +3,7 @@ import * as actionTypes from '../constants/actionTypes';
 const initialState = {
   showSales: false,
   sidebarOpen: false,
+  listView: false,
 };
 
 export default function (state = initialState, action) {
