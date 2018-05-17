@@ -158,22 +158,6 @@ export default class GameCard extends Component {
     const datePublished = new Date(Published);
 
 
-    const gameCardSQ = (
-      <div
-        className="gameCardSq"
-        onKeyDown={() => handleKeyDown}
-        onClick={() => this.handleClick()}
-        role="button"
-      >
-        <Image className="align-self gameCardSqImage" src={gameImage} size="medium" />
-        <div className="publisherDateCard">
-          {Published}
-          <MetacriticBadge display="gameCard" metaInfo={Metacritic} />
-        </div>
-        <PriceCard prices={Prices} regions={RegionsSortedByPrice} metaInfo={Metacritic} />
-      </div>
-    );
-
     const gameCardTile = () => (
       <div
         className="gameCardTile"
@@ -181,7 +165,6 @@ export default class GameCard extends Component {
         onClick={() => this.handleClick()}
         role="button"
       >
-
         <Image className="align-self gameCardTileImage" src={gameImage} size="tiny" />
         <div className="gameCardTileInfo">
           <div className="gameCardTileTitle">
@@ -198,15 +181,14 @@ export default class GameCard extends Component {
       </div>
     );
 
-
-    return (
+    const gameCardSq = () => (
       <div
         className="gameCardSq"
         onKeyDown={() => handleKeyDown}
         onClick={() => this.handleClick()}
         role="button"
       >
-        <Image className="align-self gameCardSqImage" src={gameImage} size="medium" />
+        <Image className="align-self gameCardSqImage" src={gameImage} size="small" />
         <div className="publisherDateCard">
           {Published}
           <MetacriticBadge display="gameCard" metaInfo={Metacritic} />
@@ -248,6 +230,13 @@ export default class GameCard extends Component {
             </Modal.Content>
           </Modal>
         </div>
+      </div>
+    );
+
+
+    return (
+      <div>
+        { gameCardSq() }
       </div>
     );
   }
