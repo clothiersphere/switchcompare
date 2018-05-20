@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import GameCard from './GameCard';
 import shortid from 'shortid';
+import { Button } from 'semantic-ui-react';
 
 
 export default class GameList extends Component {
@@ -54,87 +55,16 @@ export default class GameList extends Component {
     }
   }
 
-
   render() {
     const {
       switchGames,
       setSwitchGame,
       history,
-      gamesDisplayOptions,
+      displayOptions,
       searchTerm,
     } = this.props;
 
-    // const loadItems = (page) => {
-
-
-      // const self = this;
-
-      // const temp = [];
-      // const switchGames = this.props.switchGames;
-      // console.log(this.props, 'thisPropsSwitch');
-
-      // for (let i = 0; i < 4; i++) {
-      //   temp.push(this.props.switchGames[i]);
-      // }
-
-      // if (temp[temp.length - 1] != switchGames[switchGames.length - 1]) {
-      //   self.setState({
-      //     games: temp,
-      //   });
-      // } else {
-      //   self.setState({
-      //     hasMoreItems: false,
-      //   });
-      // }
-    // };
-
-    // const { term } = this.props.searchTerm;
-    // let games = switchGames.filter(game => Object.hasOwnProperty.call(game, 'Sale'));
-    // let games = switchGames;
-
-    // if (term !== '') {
-    //   games = games.filter(game => game.title_lower.includes(term));
-    //   console.log(games, 'games');
-    // }
-
-
-    // const showGames = () => {
-    //   if (games.length < 1) {
-    //     return (
-    //       <div>
-    //         <h3>No Games Found.</h3>
-    //       </div>
-    //     );
-    //   }
-
-    //   games = games.slice(0, 8);
-
-    //   return games.map((game, i) => (
-    //     <GameCard
-    //       game={game}
-    //       index={i}
-    //       key={getNsuid(game)}
-    //       setSwitchGame={setSwitchGame}
-    //       history={history}
-    //     />
-    //   ));
-    // };
-
-    // return (
-    //   <div className="gameList">
-    //     {showGames()}
-    //   </div>
-    // );
-
-
     const loader = <div className="loader" key={shortid.generate()}>Loading ...</div>;
-
-
-    // if (this.state.games.length === 0) {
-    //   games = null;
-    // }
-
-
     const games = this.state.games.map((game, i) => {
       const getNsuid = (game) => {
         let nsuid;
@@ -145,7 +75,6 @@ export default class GameList extends Component {
         }
         return nsuid;
       };
-
 
       return (
         <GameCard
@@ -165,7 +94,7 @@ export default class GameList extends Component {
     };
 
 
-    return (
+    const showAllGames = (<div>
       <div style={divStyle}>
         <InfiniteScroll
           pageStart={0}
@@ -178,6 +107,19 @@ export default class GameList extends Component {
             {games}
           </div>
         </InfiniteScroll>
+      </div>
+                          </div>);
+
+
+    const decide = () => {
+      if (displayOptions.showAllGames) {
+        return showAllGames;
+      }
+    };
+
+    return (
+      <div>
+        {decide()}
       </div>
     );
   }
