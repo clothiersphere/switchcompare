@@ -4,6 +4,7 @@ const initialState = {
   showSales: false,
   sidebarOpen: false,
   listView: false,
+  showAllGames: false,
 };
 
 export default function (state = initialState, action) {
@@ -22,6 +23,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         showSales: false,
+        showAllGames: true,
       };
     default:
       return state;
