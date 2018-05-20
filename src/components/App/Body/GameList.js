@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import GameCard from './GameCard';
 import shortid from 'shortid';
-import { Button } from 'semantic-ui-react';
+import { Button, Segment } from 'semantic-ui-react';
 
 
 export default class GameList extends Component {
@@ -65,6 +65,7 @@ export default class GameList extends Component {
     } = this.props;
 
     const loader = <div className="loader" key={shortid.generate()}>Loading ...</div>;
+
     const games = this.state.games.map((game, i) => {
       const getNsuid = (game) => {
         let nsuid;
@@ -86,6 +87,54 @@ export default class GameList extends Component {
         />
       );
     });
+
+
+    let saleGames = switchGames.filter(game => game.hasOwnProperty('Sale'));
+    saleGames = saleGames.slice(0, 5);
+
+    const onSale = saleGames.map((game, i) => (
+      <GameCard
+        game={game}
+        index={i}
+        setSwitchGame={setSwitchGame}
+        history={history}
+        key={shortid.generate()}
+      />
+    ));
+
+    const recentGames = switchGames.slice(switchGames.length - 6, switchGames.length - 1);
+
+    const recent = recentGames.map((game, i) => (
+      <GameCard
+        game={game}
+        index={i}
+        setSwitchGame={setSwitchGame}
+        history={history}
+        key={shortid.generate()}
+      />
+    ));
+
+    // const onSale = this.state.games.filter(game.hasOwnProperty('Sale').map((game, i) => {
+    //   const getNsuid = (game) => {
+    //     let nsuid;
+    //     if (game.Nsuid[2]) {
+    //       nsuid = game.Nsuid[2];
+    //     } else {
+    //       nsuid = game.Nsuid;
+    //     }
+    //     return nsuid;
+    //   };
+
+    //   return (
+    //     <GameCard
+    //       game={game}
+    //       index={i}
+    //       setSwitchGame={setSwitchGame}
+    //       history={history}
+    //       key={shortid.generate()}
+    //     />
+    //   );
+    // });
 
 
     const divStyle = {
@@ -110,11 +159,29 @@ export default class GameList extends Component {
       </div>
                           </div>);
 
+    const home = (
+      <div style={{ height: '760px' }}>
+        <Segment>
+          On Sale
+          <div className="gameList">
+            {onSale}
+          </div>
+        </Segment>
+        <Segment>
+          Recent Releases
+          <div className="gameList">
+            {recent}
+          </div>
+        </Segment>
+      </div>
+    );
 
     const decide = () => {
       if (displayOptions.showAllGames) {
         return showAllGames;
       }
+
+      return home;
     };
 
     return (
