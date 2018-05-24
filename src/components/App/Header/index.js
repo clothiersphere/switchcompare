@@ -3,9 +3,6 @@ import { Menu, Button, Icon, Input, Segment, Image, Checkbox } from 'semantic-ui
 import imgUrl from '../../../../public/images/switch_controller_slice.jpg';
 import SwitchLogo from '../../../../public/images/switch_logo.png';
 
-console.log(imgUrl, 'help');
-
-
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +11,17 @@ class Header extends Component {
     };
   }
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+  handleItemClick = (e, { name }) => {
+    if (name === 'all games') {
+      this.props.history.push('/all');
+    }
+
+    if (name === 'home') {
+      this.props.history.push('/');
+    }
+
+    this.setState({ activeItem: name });
+  }
 
   render() {
     const {
@@ -23,6 +30,7 @@ class Header extends Component {
       searchGames,
       toggleSidebar,
       displayOptions,
+      history,
     } = this.props;
 
     const { activeItem } = this.state;
@@ -45,33 +53,10 @@ class Header extends Component {
             </Menu.Item>
           </Menu.Menu>
         </Menu>
+        <div />
       </div>
     );
   }
 }
 
 export default Header;
-
-// <div className="sortboxes">
-// <Checkbox label="metacritic" />
-// <Checkbox label="percentage" />
-// <Checkbox label="release date" />
-// </div>
-
-// <div className="headerMenuButtons">
-//   <Button.Group>
-//     <Button circular icon="list layout" />
-//     <Button circular icon="block layout" />
-//   </Button.Group>
-// </div>
-
-
-// <Button>Home</Button>
-// <Button onClick={() => showAllGames()}>All Games</Button>
-// <Button onClick={() => showGameSales()}>Sale</Button>
-// <Button>About</Button>
-
-
-// <div>
-// <Button className="sidebarButton" size="large" onClick={() => toggleSidebar()}><Icon size="big" name={sidebarButton} /></Button>
-// </div>
