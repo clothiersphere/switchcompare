@@ -13,6 +13,7 @@ class App extends Component {
     this.props.getSwitchGames();
   }
 
+
   render() {
     const {
       switchGames,
@@ -22,9 +23,10 @@ class App extends Component {
       displayOptions,
       searchGames,
       searchTerm,
+      toggleSidebar,
+      history,
 
     } = this.props;
-
 
     return (
       <div className="App">
@@ -32,13 +34,18 @@ class App extends Component {
           searchGames={searchGames}
           showAllGames={showAllGames}
           showOnSale={showOnSale}
+          toggleSidebar={toggleSidebar}
+          displayOptions={displayOptions}
+          history={history}
         />
         <Body
           searchTerm={searchTerm}
           switchGames={switchGames}
           setSwitchGame={setSwitchGame}
           displayOptions={displayOptions}
+          history={history}
         />
+        <div className="footer" />
       </div>
     );
   }
@@ -70,6 +77,7 @@ function mapDispatchToProps(dispatch) {
     showOnSale: () => dispatch(actions.showOnSale()),
     showAllGames: () => dispatch(actions.showAllGames()),
     searchGames: term => dispatch(actions.searchGames(term)),
+    toggleSidebar: () => dispatch(actions.toggleSidebar()),
   };
 }
 
