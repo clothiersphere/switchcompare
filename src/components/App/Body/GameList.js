@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
-import GameCard from './GameCard';
+import { Button, Segment, Icon, Menu } from 'semantic-ui-react';
 import shortid from 'shortid';
-import { Button, Segment } from 'semantic-ui-react';
+import GameCard from './GameCard';
 
 
-export default class GameList extends Component {
+import GenreFilter from './GenreFilter';
+
+
+class GameList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,6 +16,11 @@ export default class GameList extends Component {
       hasMoreItems: true,
       count: 0,
       index: 0,
+      calendar: false,
+      price: false,
+      score: false,
+      percent: false,
+
     };
   }
 
@@ -22,7 +30,6 @@ export default class GameList extends Component {
     const games = self.state.games;
 
     let { switchGames, displayOptions } = this.props;
-    // display options
     if (displayOptions.showOnSale) {
       switchGames = switchGames.filter(game => Object.hasOwnProperty.call(game, 'Sale'));
     }
@@ -36,8 +43,7 @@ export default class GameList extends Component {
         end = lastPosition;
       }
 
-
-      for (let i = start; i < end; i++) {
+      for (let i = start; i < end; i += 1) {
         games.push(switchGames[i]);
       }
 
@@ -55,6 +61,10 @@ export default class GameList extends Component {
     }
   }
 
+  handleClick = (e, { name }) => {
+    this.setState({ [`${name}`]: !this.state[`${name}`] });
+  }
+
   render() {
     const {
       switchGames,
@@ -64,29 +74,33 @@ export default class GameList extends Component {
       searchTerm,
     } = this.props;
 
+    const {
+      calendar,
+      price,
+      score,
+      percent,
+    } = this.state;
+
+    const getNsuid = (game) => {
+      let nsuid;
+      if (game.Nsuid[2]) {
+        nsuid = game.Nsuid[2];
+      } else {
+        nsuid = game.Nsuid;
+      }
+      return nsuid;
+    };
+
     const loader = <div className="loader" key={shortid.generate()}>Loading ...</div>;
 
-    const games = this.state.games.map((game, i) => {
-      const getNsuid = (game) => {
-        let nsuid;
-        if (game.Nsuid[2]) {
-          nsuid = game.Nsuid[2];
-        } else {
-          nsuid = game.Nsuid;
-        }
-        return nsuid;
-      };
-
-      return (
-        <GameCard
-          game={game}
-          index={i}
-          setSwitchGame={setSwitchGame}
-          history={history}
-          key={shortid.generate()}
-        />
-      );
-    });
+    const games = this.state.games.map((game, i) => (
+      <GameCard
+        game={game}
+        index={getNsuid(game)}
+        setSwitchGame={setSwitchGame}
+        key={shortid.generate()}
+      />
+    ));
 
 
     let saleGames = switchGames.filter(game => game.hasOwnProperty('Sale'));
@@ -95,9 +109,8 @@ export default class GameList extends Component {
     const onSale = saleGames.map((game, i) => (
       <GameCard
         game={game}
-        index={i}
+        index={getNsuid(game)}
         setSwitchGame={setSwitchGame}
-        history={history}
         key={shortid.generate()}
       />
     ));
@@ -107,35 +120,11 @@ export default class GameList extends Component {
     const recent = recentGames.map((game, i) => (
       <GameCard
         game={game}
-        index={i}
+        index={getNsuid(game)}
         setSwitchGame={setSwitchGame}
-        history={history}
         key={shortid.generate()}
       />
     ));
-
-    // const onSale = this.state.games.filter(game.hasOwnProperty('Sale').map((game, i) => {
-    //   const getNsuid = (game) => {
-    //     let nsuid;
-    //     if (game.Nsuid[2]) {
-    //       nsuid = game.Nsuid[2];
-    //     } else {
-    //       nsuid = game.Nsuid;
-    //     }
-    //     return nsuid;
-    //   };
-
-    //   return (
-    //     <GameCard
-    //       game={game}
-    //       index={i}
-    //       setSwitchGame={setSwitchGame}
-    //       history={history}
-    //       key={shortid.generate()}
-    //     />
-    //   );
-    // });
-
 
     const divStyle = {
       height: '760px',
@@ -159,36 +148,33 @@ export default class GameList extends Component {
       </div>
                           </div>);
 
-    const home = (
-      <div style={{ height: '760px' }}>
-        <Segment>
-          On Sale
-          <div className="gameList">
-            {onSale}
-          </div>
-        </Segment>
-        <Segment>
-          Recent Releases
-          <div className="gameList">
-            {recent}
-          </div>
-        </Segment>
-      </div>
-    );
-
-    const decide = () => {
-      if (displayOptions.showAllGames) {
-        return showAllGames;
-      }
-
-      return home;
-    };
-
     return (
       <div>
-        {decide()}
+        <Segment>
+          <GenreFilter games={switchGames} />
+        </Segment>
+        Sort by:
+        <Button name="calendar" toggle active={calendar} onClick={this.handleClick} as="div" icon>
+          <Icon name="calendar" />
+            Release Date
+        </Button>
+        <Button name="price" toggle active={price} onClick={this.handleClick} icon>
+          <Icon name="dollar" />
+            Price
+        </Button>
+        <Button name="score" toggle active={score} onClick={this.handleClick} icon>
+            Metacritic Score
+        </Button>
+        <Button toggle active={percent} onClick={this.handleClick} icon>
+          <Icon name="percent" />
+            Off
+        </Button>
+
+        {showAllGames}
       </div>
     );
   }
 }
+
+export default GameList;
 
