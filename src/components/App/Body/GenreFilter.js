@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dropdown } from 'semantic-ui-react';
 
-const GenreDropdown = ({ games }) => {
+const GenreFilter = ({ games }) => {
   const genre = {};
   const options = [];
 
@@ -25,4 +25,4 @@ const GenreDropdown = ({ games }) => {
   );
 };
 
-export default GenreDropdown;
+export default GenreFilter;
