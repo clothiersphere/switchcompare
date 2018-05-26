@@ -3,6 +3,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 import { Button, Segment, Icon, Menu } from 'semantic-ui-react';
 import shortid from 'shortid';
 import GameCard from './GameCard';
+import SortOptions from './SortOptions';
 
 
 import GenreFilter from './GenreFilter';
@@ -16,18 +17,13 @@ class GameList extends Component {
       hasMoreItems: true,
       count: 0,
       index: 0,
-      calendar: false,
-      price: false,
-      score: false,
-      percent: false,
-
     };
   }
 
   loadItems(page) {
     const self = this;
 
-    const games = self.state.games;
+    const { games } = self.state;
 
     let { switchGames, displayOptions } = this.props;
     if (displayOptions.showOnSale) {
@@ -61,9 +57,6 @@ class GameList extends Component {
     }
   }
 
-  handleClick = (e, { name }) => {
-    this.setState({ [`${name}`]: !this.state[`${name}`] });
-  }
 
   render() {
     const {
@@ -73,13 +66,6 @@ class GameList extends Component {
       displayOptions,
       searchTerm,
     } = this.props;
-
-    const {
-      calendar,
-      price,
-      score,
-      percent,
-    } = this.state;
 
     const getNsuid = (game) => {
       let nsuid;
@@ -93,31 +79,7 @@ class GameList extends Component {
 
     const loader = <div className="loader" key={shortid.generate()}>Loading ...</div>;
 
-    const games = this.state.games.map((game, i) => (
-      <GameCard
-        game={game}
-        index={getNsuid(game)}
-        setSwitchGame={setSwitchGame}
-        key={shortid.generate()}
-      />
-    ));
-
-
-    let saleGames = switchGames.filter(game => game.hasOwnProperty('Sale'));
-    saleGames = saleGames.slice(0, 5);
-
-    const onSale = saleGames.map((game, i) => (
-      <GameCard
-        game={game}
-        index={getNsuid(game)}
-        setSwitchGame={setSwitchGame}
-        key={shortid.generate()}
-      />
-    ));
-
-    const recentGames = switchGames.slice(switchGames.length - 6, switchGames.length - 1);
-
-    const recent = recentGames.map((game, i) => (
+    const games = this.state.games.map(game => (
       <GameCard
         game={game}
         index={getNsuid(game)}
@@ -153,23 +115,7 @@ class GameList extends Component {
         <Segment>
           <GenreFilter games={switchGames} />
         </Segment>
-        Sort by:
-        <Button name="calendar" toggle active={calendar} onClick={this.handleClick} as="div" icon>
-          <Icon name="calendar" />
-            Release Date
-        </Button>
-        <Button name="price" toggle active={price} onClick={this.handleClick} icon>
-          <Icon name="dollar" />
-            Price
-        </Button>
-        <Button name="score" toggle active={score} onClick={this.handleClick} icon>
-            Metacritic Score
-        </Button>
-        <Button toggle active={percent} onClick={this.handleClick} icon>
-          <Icon name="percent" />
-            Off
-        </Button>
-
+        <SortOptions />
         {showAllGames}
       </div>
     );
