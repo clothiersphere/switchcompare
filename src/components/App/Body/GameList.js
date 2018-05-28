@@ -65,6 +65,7 @@ class GameList extends Component {
       history,
       displayOptions,
       searchTerm,
+      toggleDisplaySort,
     } = this.props;
 
     const getNsuid = (game) => {
@@ -115,7 +116,7 @@ class GameList extends Component {
         <Segment>
           <GenreFilter games={switchGames} />
         </Segment>
-        <SortOptions />
+        <SortOptions toggleDisplaySort={toggleDisplaySort} />
         {showAllGames}
       </div>
     );

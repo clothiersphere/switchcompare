@@ -25,7 +25,7 @@ class App extends Component {
       searchTerm,
       toggleSidebar,
       history,
-
+      toggleDisplaySort,
     } = this.props;
 
     return (
@@ -44,6 +44,7 @@ class App extends Component {
           setSwitchGame={setSwitchGame}
           displayOptions={displayOptions}
           history={history}
+          toggleDisplaySort={toggleDisplaySort}
         />
         <div className="footer" />
       </div>
@@ -78,6 +79,7 @@ function mapDispatchToProps(dispatch) {
     showAllGames: () => dispatch(actions.showAllGames()),
     searchGames: term => dispatch(actions.searchGames(term)),
     toggleSidebar: () => dispatch(actions.toggleSidebar()),
+    toggleDisplaySort: method => dispatch(actions.toggleDisplaySort(method)),
   };
 }
 

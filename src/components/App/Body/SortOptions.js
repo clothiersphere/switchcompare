@@ -5,7 +5,7 @@ class SortOptions extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      calendar: false,
+      release: false,
       price: false,
       score: false,
       percent: false,
@@ -13,21 +13,22 @@ class SortOptions extends Component {
   }
 
   handleClick = (e, { name }) => {
+    this.props.toggleDisplaySort(name);
     this.setState({ [`${name}`]: !this.state[`${name}`] });
   }
 
   render() {
     const {
-      calendar,
+      release,
       price,
       score,
       percent,
     } = this.state;
 
     return (
-      <div>
+      <div className="sortBar">
         Sort by:
-        <Button name="calendar" toggle active={calendar} onClick={this.handleClick} as="div" icon>
+        <Button name="release" toggle active={release} onClick={this.handleClick} as="div" icon>
           <Icon name="calendar" />
             Release Date
         </Button>
