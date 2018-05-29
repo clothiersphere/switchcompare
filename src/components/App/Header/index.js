@@ -15,16 +15,18 @@ class Header extends Component {
     if (name === 'all games') {
       this.props.history.push('/all');
     }
-
     if (name === 'home') {
       this.props.history.push('/');
     }
-
+    if (name === 'on sale') {
+      this.props.history.push('/sale');
+    }
     this.setState({ activeItem: name });
   }
 
   render() {
     const {
+      showOnSale,
       showGameSales,
       showAllGames,
       searchGames,
@@ -44,7 +46,7 @@ class Header extends Component {
             onClick={this.handleItemClick}
           />
           <Menu.Item name="all games" active={activeItem === 'all games'} onClick={this.handleItemClick} />
-          <Menu.Item name="on sale" active={activeItem === 'sale'} onClick={this.handleItemClick} />
+          <Menu.Item name="on sale" active={activeItem === 'on sale'} onClick={this.handleItemClick} />
           <Menu.Item name="recent releases" active={activeItem === 'recent releases'} onClick={this.handleItemClick} />
           <Menu.Item name="about" active={activeItem === 'about'} onClick={this.handleItemClick} />
           <Menu.Menu position="right">
