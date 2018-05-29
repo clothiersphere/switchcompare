@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import { Button, Segment, Icon, Menu } from 'semantic-ui-react';
 import shortid from 'shortid';
-import sortBy from 'sort-array';
 import GameCard from './GameCard';
 import SortOptions from './SortOptions';
 import GenreFilter from './GenreFilter';
@@ -26,14 +25,20 @@ class ShowAllGames extends Component {
   }
 
 
-  // componentDidMount() {
-  //   console.log(this.props.switchGames, 'CDU');
-  // }
-
   componentWillReceiveProps(nextProps) {
+    console.log(this.props.displayOptions.release.enabled, 'release');
+    console.log(this.props.displayOptions.price.enabled, 'price');
+
+
     if (this.props.switchGames !== nextProps.switchGames && this.state.games.length !== 0) {
       const gameLen = this.state.games.length;
       const newGames = nextProps.switchGames.slice(0, gameLen - 1);
+      console.log(newGames, 'newgames');
+      this.setState({ games: newGames });
+    } else if (this.props.displayOptions !== nextProps.displayOptions) {
+      const gameLen = this.state.games.length;
+      const newGames = nextProps.switchGames.slice(0, gameLen - 1);
+      console.log(newGames, 'newgamesDisplay');
       this.setState({ games: newGames });
     }
   }
