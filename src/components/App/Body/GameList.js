@@ -1,123 +1,110 @@
 import React, { Component } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
+import sortBy from 'sort-array';
 import { Button, Segment, Icon, Menu } from 'semantic-ui-react';
 import shortid from 'shortid';
 import GameCard from './GameCard';
 import SortOptions from './SortOptions';
-
-
 import GenreFilter from './GenreFilter';
+import ShowAllGames from './showAllGames';
 
 
 class GameList extends Component {
   constructor(props) {
     super(props);
+
+
     this.state = {
       games: [],
       hasMoreItems: true,
       count: 0,
       index: 0,
+      release: false,
+      price: false,
+      sale: false,
+      score: false,
     };
   }
 
-  loadItems(page) {
-    const self = this;
 
-    const { games } = self.state;
-
-    let { switchGames, displayOptions } = this.props;
-    if (displayOptions.showOnSale) {
-      switchGames = switchGames.filter(game => Object.hasOwnProperty.call(game, 'Sale'));
-    }
-
-    if (switchGames.length > 1) {
-      const start = self.state.index;
-      let end = self.state.index + 7;
-      const lastPosition = switchGames.length - 1;
-
-      if (!switchGames[end]) {
-        end = lastPosition;
-      }
-
-      for (let i = start; i < end; i += 1) {
-        games.push(switchGames[i]);
-      }
-
-      if (self.state.index <= lastPosition - 7) {
-        self.setState({
-          games,
-          count: self.state.count + 1,
-          index: end,
-        });
-      } else {
-        self.setState({
-          hasMoreItems: false,
-        });
-      }
-    }
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   console.log(nextProps.displayOptions.sale.enabled, 'CWRP');
+  //   console.log(this.props.displayOptions.sale.enabled, 'CWRP');
+  //   if (nextProps.displayOptions !== this.props.displayOptions) {
+  //     this.setState({ temp: this.props.switchGames });
+  //   }
+  // }
 
 
   render() {
     const {
-      switchGames,
       setSwitchGame,
       history,
       displayOptions,
       searchTerm,
       toggleDisplaySort,
+      switchGames,
+      location,
+      filterGenre,
+      genreFilter,
     } = this.props;
 
-    const getNsuid = (game) => {
-      let nsuid;
-      if (game.Nsuid[2]) {
-        nsuid = game.Nsuid[2];
-      } else {
-        nsuid = game.Nsuid;
+    let games = switchGames;
+
+    if (genreFilter.length > 0) {
+      const filterTerms = genreFilter.toString();
+
+      console.log(filterTerms, 'filterTerms');
+      for (let i = 0; i < genreFilter.length; i++) {
+        games = games.filter(game => game.Categories.includes(genreFilter[i]));
       }
-      return nsuid;
-    };
 
-    const loader = <div className="loader" key={shortid.generate()}>Loading ...</div>;
-
-    const games = this.state.games.map(game => (
-      <GameCard
-        game={game}
-        index={getNsuid(game)}
-        setSwitchGame={setSwitchGame}
-        key={shortid.generate()}
-      />
-    ));
-
-    const divStyle = {
-      height: '760px',
-      overflow: 'auto',
-    };
+      console.log(games.length, 'gamelist');
 
 
-    const showAllGames = (<div>
-      <div style={divStyle}>
-        <InfiniteScroll
-          pageStart={0}
-          loadMore={this.loadItems.bind(this)}
-          hasMore={this.state.hasMoreItems}
-          loader={loader}
-          useWindow={false}
-        >
-          <div className="gameList">
-            {games}
-          </div>
-        </InfiniteScroll>
-      </div>
-                          </div>);
+      // games = games.filter(game => game.Categories.includes('action' && 'adventure'));
+    }
+
+    if (location.pathname === '/sale') {
+      games = games.filter(game => Object.hasOwnProperty.call(game, 'Sale'));
+    }
+
+    if (displayOptions.release.enabled) {
+      // console.log(games[0], 'games');
+      sortBy(games, 'Published');
+      // games.reverse();
+      // console.log(games[0], 'games');
+    }
+    if (displayOptions.score.enabled) {
+      sortBy(games, ['score', 'Title']);
+      games.reverse();
+    }
+
+    if (displayOptions.price.enabled) {
+      sortBy(games, ['lowestPrice', 'Title']);
+    }
+
+    if (displayOptions.price.enabled && displayOptions.price.ascending) {
+      sortBy(games, 'lowestPrice');
+      games.reverse();
+    }
+
+    if (displayOptions.score.enabled && displayOptions.score.ascending) {
+      sortBy(games, 'score');
+      games.reverse();
+    }
+
+    if (displayOptions.score.enabled && displayOptions.price.enabled) {
+      sortBy(games, 'score', 'Price');
+    }
 
     return (
       <div>
         <Segment>
-          <GenreFilter games={switchGames} />
+          <GenreFilter filterGenre={filterGenre} games={switchGames} />
         </Segment>
         <SortOptions toggleDisplaySort={toggleDisplaySort} />
-        {showAllGames}
+        <ShowAllGames displayOptions={displayOptions} switchGames={games} />
       </div>
     );
   }
