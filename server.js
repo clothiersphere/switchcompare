@@ -65845,6 +65845,17 @@ app.get('/api/eshop', (req, res) => {
         Prices,
       };
     }
+
+    game.lowestPrice = game.Prices[game.RegionsSortedByPrice[0]];
+
+    function getScore(game) {
+      if (game.Metacritic.metascore) {
+        return game.Metacritic.metascore;
+      }
+      return 0;
+    }
+
+    game.score = getScore(game);
   });
 
 
