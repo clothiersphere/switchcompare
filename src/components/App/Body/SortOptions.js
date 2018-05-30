@@ -8,13 +8,13 @@ class SortOptions extends Component {
       release: false,
       price: false,
       score: false,
-      percent: false,
+      sale: false,
     };
   }
 
   handleClick = (e, { name }) => {
-    this.props.toggleDisplaySort(name);
     this.setState({ [`${name}`]: !this.state[`${name}`] });
+    this.props.toggleDisplaySort(name);
   }
 
   render() {
@@ -22,7 +22,7 @@ class SortOptions extends Component {
       release,
       price,
       score,
-      percent,
+      sale,
     } = this.state;
 
     return (
@@ -39,7 +39,7 @@ class SortOptions extends Component {
         <Button name="score" toggle active={score} onClick={this.handleClick} icon>
             Metacritic Score
         </Button>
-        <Button toggle active={percent} onClick={this.handleClick} icon>
+        <Button name="sale" toggle active={sale} onClick={this.handleClick} icon>
           <Icon name="percent" />
             Off
         </Button>
