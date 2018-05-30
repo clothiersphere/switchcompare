@@ -32,30 +32,19 @@ class ShowAllGames extends Component {
 
     if (this.props.switchGames !== nextProps.switchGames && this.state.games.length !== 0) {
       const gameLen = this.state.games.length;
-      const newGames = nextProps.switchGames.slice(0, gameLen - 1);
+      console.log(gameLen, 'gamelength');
+      const newGames = nextProps.switchGames;
       console.log(newGames, 'newgames');
       this.setState({ games: newGames });
-    } else if (this.props.displayOptions !== nextProps.displayOptions) {
+    } else
+
+    if (this.props.displayOptions !== nextProps.displayOptions) {
       const gameLen = this.state.games.length;
       const newGames = nextProps.switchGames.slice(0, gameLen - 1);
       console.log(newGames, 'newgamesDisplay');
       this.setState({ games: newGames });
     }
   }
-  // componentWillReceiveProps(nextProps) {
-  //   if (nextProps.displayOptions.sale !== this.props.displayOptions.sale) {
-  //     if (nextProps.displayOptions.sale) {
-  //       const games = this.state.games.filter(game => Object.hasOwnProperty.call(game, 'Sale'));
-  //       this.setState({ games });
-  //     }
-  //   }
-  // }
-
-  // componentDidUpdate() {
-  //   console.log(this.props.switchGames, 'CDU');
-  //   console.log(this.state.games, 'gamesstate');
-  // }
-
 
   loadItems(page) {
     const self = this;
