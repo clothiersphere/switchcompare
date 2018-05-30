@@ -5,6 +5,7 @@ import { showAllGames } from './showAllGames';
 import { searchGames } from './searchGames';
 import { toggleSidebar } from './toggleSidebar';
 import { toggleDisplaySort } from './toggleDisplaySort';
+import { filterGenre } from './filterGenre';
 
 export {
   getSwitchGames,
@@ -14,4 +15,5 @@ export {
   searchGames,
   toggleSidebar,
   toggleDisplaySort,
+  filterGenre,
 };
