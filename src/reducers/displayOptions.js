@@ -6,10 +6,10 @@ const initialState = {
   listView: false,
   showAllGames: false,
   showHome: true,
-  release: { enabled: false },
-  price: { enabled: false },
-  score: { enabled: false },
-  sale: { enabled: false },
+  release: { enabled: false, ascending: true },
+  price: { enabled: false, ascending: true },
+  score: { enabled: false, ascending: true },
+  sale: false,
 };
 
 export default function (state = initialState, action) {
@@ -19,11 +19,10 @@ export default function (state = initialState, action) {
         ...state,
         sidebarOpen: !state.sidebarOpen,
       };
-    case actionTypes.SHOW_ON_SALE:
+    case actionTypes.TOGGLE_ON_SALE:
       return {
         ...state,
-        showSales: true,
-        showHome: false,
+        showSales: !state.showSales,
       };
     case actionTypes.SHOW_ALL_GAMES:
       return {
@@ -42,22 +41,25 @@ export default function (state = initialState, action) {
     case actionTypes.SORT_BY_RELEASE:
       return {
         ...state,
-        release: { enabled: !initialState.release.enabled },
+        // release: !state.release,
+        release: { enabled: !state.release.enabled },
       };
     case actionTypes.SORT_BY_PRICE:
       return {
         ...state,
-        release: { enabled: !initialState.price.enabled },
+        price: { enabled: !state.price.enabled, ascending: true },
       };
+
     case actionTypes.SORT_BY_SCORE:
       return {
         ...state,
-        release: { enabled: !initialState.score.enabled },
+        score: { enabled: !state.score.enabled },
       };
     case actionTypes.SORT_BY_SALE_PERCENTAGE:
       return {
         ...state,
-        release: { enabled: !initialState.sale.enabled },
+        // sale: { enabled: !state.sale.enabled },
+        sale: !state.sale,
       };
 
     default:
