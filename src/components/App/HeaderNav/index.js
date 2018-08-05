@@ -22,7 +22,10 @@ class HeaderNav extends Component {
       this.props.history.push('/sale');
     }
     this.setState({ activeItem: name });
-  }
+  };
+
+  handleButtonClick = () => this.props.toggleSidebar();
+  handleSidebarHide = () => this.props.toggleSidebar();
 
   render() {
     const {
@@ -37,23 +40,38 @@ class HeaderNav extends Component {
 
     const { activeItem } = this.state;
 
-    const MenuSearchBar = () => <Menu.Menu position="right">
-            <Menu.Item>
-              <Input icon="search" placeholder="Search..." />
-            </Menu.Item>
-          </Menu.Menu>
+    const MenuSearchBar = () => (
+      <Menu.Menu position="right">
+        <Menu.Item>
+          <Input icon="search" placeholder="Search..." />
+        </Menu.Item>
+      </Menu.Menu>
+    );
 
     return (
       <div className="HeaderMenu">
         <Menu size="massive" secondary text widths="12">
+          <Menu.Item position="left">
+            <Button icon onClick={this.handleButtonClick}>
+              <Icon name="sidebar" />
+            </Button>
+          </Menu.Item>
+          <Menu.Item name="home" active={activeItem === 'home'} onClick={this.handleItemClick} />
           <Menu.Item
-            name="home"
-            active={activeItem === 'home'}
+            name="all games"
+            active={activeItem === 'all games'}
             onClick={this.handleItemClick}
           />
-          <Menu.Item name="all games" active={activeItem === 'all games'} onClick={this.handleItemClick} />
-          <Menu.Item name="on sale" active={activeItem === 'on sale'} onClick={this.handleItemClick} />
-          <Menu.Item name="coming soon" active={activeItem === 'coming soon'} onClick={this.handleItemClick} />
+          <Menu.Item
+            name="on sale"
+            active={activeItem === 'on sale'}
+            onClick={this.handleItemClick}
+          />
+          <Menu.Item
+            name="coming soon"
+            active={activeItem === 'coming soon'}
+            onClick={this.handleItemClick}
+          />
           <Menu.Item name="about" active={activeItem === 'about'} onClick={this.handleItemClick} />
         </Menu>
         <div />
