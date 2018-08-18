@@ -7,12 +7,11 @@ import GameCard from './GameCard';
 import SortOptions from './SortOptions';
 import GenreFilter from './GenreFilter';
 import ShowAllGames from './showAllGames';
-
+import GameListNav from './GameListNav';
 
 class GameList extends Component {
   constructor(props) {
     super(props);
-
 
     this.state = {
       games: [],
@@ -26,7 +25,6 @@ class GameList extends Component {
     };
   }
 
-
   // componentWillReceiveProps(nextProps) {
   //   console.log(nextProps.displayOptions.sale.enabled, 'CWRP');
   //   console.log(this.props.displayOptions.sale.enabled, 'CWRP');
@@ -34,7 +32,6 @@ class GameList extends Component {
   //     this.setState({ temp: this.props.switchGames });
   //   }
   // }
-
 
   render() {
     const {
@@ -60,9 +57,6 @@ class GameList extends Component {
       }
 
       console.log(games.length, 'gamelist');
-
-
-      // games = games.filter(game => game.Categories.includes('action' && 'adventure'));
     }
 
     if (location.pathname === '/sale') {
@@ -76,39 +70,28 @@ class GameList extends Component {
       // console.log(games[0], 'games');
     }
     if (displayOptions.score.enabled) {
-      sortBy(games, ['score', 'Title']);
+      sortBy(games, ['score', 'Price']);
       games.reverse();
     }
 
     if (displayOptions.price.enabled) {
       sortBy(games, ['lowestPrice', 'Title']);
-    }
-
-    if (displayOptions.price.enabled && displayOptions.price.ascending) {
-      sortBy(games, 'lowestPrice');
-      games.reverse();
-    }
-
-    if (displayOptions.score.enabled && displayOptions.score.ascending) {
-      sortBy(games, 'score');
-      games.reverse();
-    }
-
-    if (displayOptions.score.enabled && displayOptions.price.enabled) {
-      sortBy(games, 'score', 'Price');
+      // games.reverse();
     }
 
     return (
       <div>
-        <Segment>
-          <GenreFilter filterGenre={filterGenre} games={switchGames} />
-        </Segment>
-        <SortOptions toggleDisplaySort={toggleDisplaySort} />
+        <div className="GameListNavContainer">
+          <GameListNav
+            filterGenre={filterGenre}
+            games={switchGames}
+            toggleDisplaySort={toggleDisplaySort}
+          />
         <ShowAllGames displayOptions={displayOptions} switchGames={games} />
+        </div>
       </div>
     );
   }
 }
 
 export default GameList;
-

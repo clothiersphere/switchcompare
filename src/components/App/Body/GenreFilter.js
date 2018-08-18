@@ -5,9 +5,11 @@ const GenreFilter = ({ games, filterGenre }) => {
   const genre = {};
   const options = [];
 
-  games.forEach((game) => {
+  console.log(games, 'games');
+
+  games.forEach(game => {
     const { Categories } = game;
-    Categories.forEach((category) => {
+    Categories.forEach(category => {
       genre[category] = category;
     });
   });
@@ -16,12 +18,10 @@ const GenreFilter = ({ games, filterGenre }) => {
     options.push({ key, text: key, value: key });
   });
 
-
   return (
-    <div>
+    <div className="GenreFilter">
       <Dropdown
         placeholder="Filter by one or multiple genres"
-        fluid
         multiple
         selection
         options={options}
