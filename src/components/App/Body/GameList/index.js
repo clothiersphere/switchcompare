@@ -3,11 +3,11 @@ import InfiniteScroll from 'react-infinite-scroller';
 import sortBy from 'sort-array';
 import { Button, Segment, Icon, Menu } from 'semantic-ui-react';
 import shortid from 'shortid';
-import GameCard from './GameCard';
-import SortOptions from './SortOptions';
-import GenreFilter from './GenreFilter';
-import ShowAllGames from './showAllGames';
-import GameListNav from './GameListNav';
+import GameCard from '../GameCard';
+import SortOptions from '../SortOptions';
+import GenreFilter from '../GenreFilter';
+import ShowAllGames from '../showAllGames';
+import GameListNav from '../GameList/Nav';
 
 class GameList extends Component {
   constructor(props) {
@@ -87,7 +87,7 @@ class GameList extends Component {
             games={switchGames}
             toggleDisplaySort={toggleDisplaySort}
           />
-        <ShowAllGames displayOptions={displayOptions} switchGames={games} />
+          <ShowAllGames displayOptions={displayOptions} switchGames={games} />
         </div>
       </div>
     );

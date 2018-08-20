@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Button, Icon, Segment } from 'semantic-ui-react';
-import GenreFilter from './GenreFilter';
-import SortOptions from './SortOptions';
-import GameListNavSearchbar from './GameListNavSearchbar';
+import GenreFilter from '../../GenreFilter';
+import SortOptions from '../../SortOptions';
+import GameListNavSearchbar from './Searchbar';
 
 export default class GameListNav extends Component {
   render() {
