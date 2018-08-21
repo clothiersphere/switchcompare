@@ -1,6 +1,8 @@
 import * as actionTypes from '../constants/actionTypes';
 
 const initialState = {
+  toggleGridView: true,
+  toggleTileView: false,
   showSales: false,
   sidebarOpen: false,
   listView: false,
@@ -12,7 +14,7 @@ const initialState = {
   sale: false,
 };
 
-export default function (state = initialState, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
     case actionTypes.TOGGLE_SIDEBAR:
       return {
@@ -60,6 +62,18 @@ export default function (state = initialState, action) {
         ...state,
         // sale: { enabled: !state.sale.enabled },
         sale: !state.sale,
+      };
+    case actionTypes.TOGGLE_GRID_VIEW:
+      return {
+        ...state,
+        toggleGridView: true,
+        toggleTileView: false,
+      };
+    case actionTypes.TOGGLE_TILE_VIEW:
+      return {
+        ...state,
+        toggleGridView: false,
+        toggleTileView: true,
       };
 
     default:
