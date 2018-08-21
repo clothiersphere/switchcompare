@@ -10,6 +10,7 @@ import MetacriticBadge from './MetacriticBadge';
 import TilePriceCard from './Tile/TilePriceCard';
 import missingImage from '../../../../../public/images/missingImage.png';
 import GameCardSquare from './Square';
+import GameCardTile from './Tile';
 
 countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
 
@@ -44,6 +45,8 @@ export default class GameCard extends Component {
       Nsuid,
       Sale,
     } = this.props.game;
+
+    // console.log(this.props, 'GameCard props');
 
     const handleKeyDown = ev => {
       if (ev.keyCode === 13) {
@@ -228,14 +231,31 @@ export default class GameCard extends Component {
       </div>
     );
 
-    return (
-      <div onClick={() => this.handleClick()} onKeyDown={() => handleKeyDown} role="button">
+    const DisplayType = () => {
+      console.log(this.props, 'props');
+      if (this.props.displayOptions.toggleTileView) {
+        return (
+          <GameCardTile
+            handleKeyDown={handleKeyDown}
+            gameImage={gameImage}
+            published={Published}
+            props={this.props}
+          />
+        );
+      }
+      return (
         <GameCardSquare
           handleKeyDown={handleKeyDown}
           gameImage={gameImage}
           published={Published}
           props={this.props}
         />
+      );
+    };
+
+    return (
+      <div onClick={() => this.handleClick()} onKeyDown={() => handleKeyDown} role="button">
+        <DisplayType />
         <Modal open={this.state.modalOpen} onClose={() => this.handleClose()} dimmer="blurring">
           <Modal.Header>
             <div className="modalHeader">
@@ -268,24 +288,3 @@ export default class GameCard extends Component {
     );
   }
 }
-
-// <div
-//   className="gameCardSq"
-//   onKeyDown={() => handleKeyDown}
-//   onClick={() => this.handleClick()}
-//   role="button"
-// >
-//   <Image
-//     className="align-self gameCardSqImage"
-//     src={gameImage}
-//     size="small"
-//     onError={e => (e.target.style.display = 'none')}
-//   />
-//   <div className="publisherDateCard">
-//     {Published}
-//     <MetacriticBadge display="gameCard" metaInfo={Metacritic} />
-//   </div>
-//   <PriceCard prices={Prices} regions={RegionsSortedByPrice} metaInfo={Metacritic} />
-// </div>
-// <div>
-// export default GameCard;

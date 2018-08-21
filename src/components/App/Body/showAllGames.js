@@ -6,7 +6,6 @@ import GameCard from './GameCard';
 import SortOptions from './SortOptions';
 import GenreFilter from './GenreFilter';
 
-
 class ShowAllGames extends Component {
   constructor(props) {
     super(props);
@@ -24,11 +23,9 @@ class ShowAllGames extends Component {
     };
   }
 
-
   componentWillReceiveProps(nextProps) {
     console.log(this.props.displayOptions.release.enabled, 'release');
     console.log(this.props.displayOptions.price.enabled, 'price');
-
 
     if (this.props.switchGames !== nextProps.switchGames && this.state.games.length !== 0) {
       const gameLen = this.state.games.length;
@@ -36,9 +33,7 @@ class ShowAllGames extends Component {
       const newGames = nextProps.switchGames.slice(0, gameLen);
       console.log(newGames, 'newgames');
       this.setState({ games: newGames });
-    } else
-
-    if (this.props.displayOptions !== nextProps.displayOptions) {
+    } else if (this.props.displayOptions !== nextProps.displayOptions) {
       const gameLen = this.state.games.length;
       const newGames = nextProps.switchGames.slice(0, gameLen);
       console.log(newGames, 'newgamesDisplay');
@@ -76,7 +71,6 @@ class ShowAllGames extends Component {
     }
   }
 
-
   render() {
     const {
       setSwitchGame,
@@ -87,10 +81,11 @@ class ShowAllGames extends Component {
       switchGames,
     } = this.props;
 
-    // const { switchGames } = this.props;
+    if (displayOptions.toggleTileView) {
+      view = 'tile';
+    }
 
-
-    const getNsuid = (game) => {
+    const getNsuid = game => {
       let nsuid;
       if (game.Nsuid[2]) {
         nsuid = game.Nsuid[2];
@@ -100,11 +95,19 @@ class ShowAllGames extends Component {
       return nsuid;
     };
 
-    const loader = <div className="loader" key={shortid.generate()}>Loading ...</div>;
+    let view = 'grid';
+
+    const loader = (
+      <div className="loader" key={shortid.generate()}>
+        Loading ...
+      </div>
+    );
 
     const games = this.state.games.map(game => (
-    // const games = switchGames.map(game => (
+      // const games = switchGames.map(game => (
       <GameCard
+        displayOptions={displayOptions}
+        view={view}
         game={game}
         index={getNsuid(game)}
         setSwitchGame={setSwitchGame}
@@ -113,27 +116,23 @@ class ShowAllGames extends Component {
     ));
 
     const divStyle = {
-      height: '760px',
+      height: '660px',
       overflow: 'auto',
     };
 
-
     return (
-      <div>
-        <div style={divStyle}>
-          <InfiniteScroll
-            pageStart={0}
-            loadMore={this.loadItems.bind(this)}
-            hasMore={this.state.hasMoreItems}
-            loader={loader}
-            useWindow={false}
-          >
-            <div className="gameList">
-              {games}
-            </div>
-          </InfiniteScroll>
-        </div>
-      </div>);
+      <div style={divStyle}>
+        <InfiniteScroll
+          pageStart={0}
+          loadMore={this.loadItems.bind(this)}
+          hasMore={this.state.hasMoreItems}
+          loader={loader}
+          useWindow={false}
+        >
+          <div className="gameList">{games}</div>
+        </InfiniteScroll>
+      </div>
+    );
 
     // return (
     //   <div className="gameList">
