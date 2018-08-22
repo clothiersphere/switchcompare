@@ -20,7 +20,12 @@ export default class GameCardSquare extends Component {
           {Published}
           <MetacriticBadge display="gameCard" metaInfo={Metacritic} />
         </div>
-        <PriceCard prices={Prices} regions={RegionsSortedByPrice} metaInfo={Metacritic} />
+        <PriceCard
+          prices={Prices}
+          regions={RegionsSortedByPrice}
+          metaInfo={Metacritic}
+          view="square"
+        />
       </div>
     );
   }

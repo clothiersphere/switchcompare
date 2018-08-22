@@ -7,7 +7,7 @@ import FlagIcon from '../../FlagIcon';
 import PriceCard from './PriceCard';
 import SaleCard from './SaleCard';
 import MetacriticBadge from './MetacriticBadge';
-import TilePriceCard from './Tile/TilePriceCard';
+// import TilePriceCard from './Tile/TilePriceCard';
 import missingImage from '../../../../../public/images/missingImage.png';
 import GameCardSquare from './Square';
 import GameCardTile from './Tile';
@@ -45,6 +45,8 @@ export default class GameCard extends Component {
       Nsuid,
       Sale,
     } = this.props.game;
+
+    const { toggleTileView } = this.props.displayOptions;
 
     // console.log(this.props, 'GameCard props');
 
@@ -161,79 +163,8 @@ export default class GameCard extends Component {
       </div>
     );
 
-    const gameCardTile = () => (
-      <div
-        className="gameCardTile"
-        onKeyDown={() => handleKeyDown}
-        onClick={() => this.handleClick()}
-        role="button"
-      >
-        <Image className="align-self gameCardTileImage" src={gameImage} size="tiny" />
-        <div className="gameCardTileInfo">
-          <div className="gameCardTileTitle">{Title}</div>
-          <div className="gameCardTileInfoNotTitle">
-            <MetacriticBadge display="gameCardTile" metaInfo={Metacritic} />
-            <TilePriceCard prices={Prices} sale={Sale} regions={RegionsSortedByPrice} />
-          </div>
-        </div>
-      </div>
-    );
-
-    // <Image className="align-self gameCardSqImage" src={gameImage} size="small" />
-    const gameCardSq = () => (
-      <div
-        className="gameCardSq"
-        onKeyDown={() => handleKeyDown}
-        onClick={() => this.handleClick()}
-        role="button"
-      >
-        <Image
-          className="align-self gameCardSqImage"
-          src={gameImage}
-          size="small"
-          onError={e => (e.target.style.display = 'none')}
-        />
-        <div className="publisherDateCard">
-          {Published}
-          <MetacriticBadge display="gameCard" metaInfo={Metacritic} />
-        </div>
-        <PriceCard prices={Prices} regions={RegionsSortedByPrice} metaInfo={Metacritic} />
-        <div>
-          <Modal open={this.state.modalOpen} onClose={() => this.handleClose()} dimmer="blurring">
-            <Modal.Header>
-              <div className="modalHeader">
-                <div>{Title}</div>
-                <div>{showCategories()}</div>
-              </div>
-            </Modal.Header>
-            <Modal.Content image className="modalContentImage">
-              <Image wrapped size="medium" className="modalGameImage" src={gameImage} />
-              <Modal.Description className="modalDescription">
-                <Header className="modalDescriptionHeader zeroMargin">{Excerpt}</Header>
-                <div>
-                  <p className="zeroMargin">Released: {datePublished.toString()}</p>
-                  <Icon className="external alternate" />
-                  <a href={nintendoOfficialUrl} target="_blank">
-                    Link to Official Site{' '}
-                  </a>
-                </div>
-                <div>
-                  <a href={Metacritic.link} target="_blank">
-                    Metacritic Score:{' '}
-                  </a>
-                  <MetacriticBadge display="gameCardModal" metaInfo={Metacritic} />
-                </div>
-                {showCheapList()}
-              </Modal.Description>
-            </Modal.Content>
-          </Modal>
-        </div>
-      </div>
-    );
-
     const DisplayType = () => {
-      console.log(this.props, 'props');
-      if (this.props.displayOptions.toggleTileView) {
+      if (toggleTileView) {
         return (
           <GameCardTile
             handleKeyDown={handleKeyDown}
