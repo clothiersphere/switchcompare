@@ -2,7 +2,7 @@ import * as actionTypes from '../constants/actionTypes';
 
 const initialState = {
   toggleGridView: true,
-  toggleTileView: false,
+  // toggleTileView: false,
   showSales: false,
   sidebarOpen: false,
   listView: false,
@@ -60,7 +60,6 @@ export default function(state = initialState, action) {
     case actionTypes.SORT_BY_SALE_PERCENTAGE:
       return {
         ...state,
-        // sale: { enabled: !state.sale.enabled },
         sale: !state.sale,
       };
     case actionTypes.TOGGLE_GRID_VIEW:

@@ -5,4 +5,3 @@ export function toggleTileView() {
     type: actionTypes.TOGGLE_TILE_VIEW,
   };
 }
-
