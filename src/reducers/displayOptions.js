@@ -43,7 +43,6 @@ export default function(state = initialState, action) {
     case actionTypes.SORT_BY_RELEASE:
       return {
         ...state,
-        // release: !state.release,
         release: { enabled: !state.release.enabled },
       };
     case actionTypes.SORT_BY_PRICE:
